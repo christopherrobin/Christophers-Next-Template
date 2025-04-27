@@ -12,6 +12,13 @@
 
 # testing
 /coverage
+**/test-results/          # Playwright test results
+**/playwright-report/     # Playwright HTML report
+**/screenshots/           # If you save screenshots for visual tests
+**/videos/                # If you save videos from Playwright
+**/traces/                # Playwright trace files
+*.log                     # Test logs
+__snapshots__/            # Jest snapshots (if used)
 
 # next.js
 /.next/
@@ -36,7 +43,6 @@ yarn-error.log*
 # Allow example env files
 !.env.local.example
 
-
 # vercel
 .vercel
 
@@ -44,3 +50,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# playwright (optional for VSCode extension)
+/.vscode/test-results/

@@ -80,6 +80,32 @@ This project uses [Heroicons](https://heroicons.com/) for modern SVG icons in Re
 
 For more icons and usage details, see the [Heroicons documentation](https://heroicons.com/).
 
+## Testing
+
+### Unit & Component Tests
+
+- Run all Jest tests:
+  ```bash
+  yarn test
+  ```
+- Watch mode:
+  ```bash
+  yarn test:watch
+  ```
+- Test files live in `__tests__/` and use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
+
+### End-to-End (E2E) Tests
+
+- Start your app locally:
+  ```bash
+  yarn dev
+  ```
+- In another terminal, run Playwright tests:
+  ```bash
+  yarn test:e2e
+  ```
+- E2E tests live in the `e2e/` directory. See [`e2e/README.md`](e2e/README.md) for details.
+
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).

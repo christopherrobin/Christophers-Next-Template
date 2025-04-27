@@ -9,6 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode
   ghost?: boolean
+  target?: string
+  rel?: string
 }
 
 const ButtonSpinner = () => {
@@ -35,17 +37,22 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const buttonClasses = ghost
-      ? `rounded border bg-stone-200 border-blue-500 text-blue-500 hover:bg-[#e3ded3] transition cursor-pointer px-6 py-4 bg-transparent ${className} ${
+      ? `rounded border font-extrabold bg-stone-200 border-blue-500 text-blue-500 hover:bg-[#e3ded3] transition cursor-pointer px-6 py-4 bg-transparent ${className} ${
           disabled || loading ? 'opacity-50 pointer-events-none' : ''
         }`
-      : `rounded bg-blue-500 text-white font-bold hover:bg-blue-900 transition cursor-pointer px-6 py-4 ${className} ${
+      : `rounded bg-blue-500 text-white font-extrabold hover:bg-blue-900 transition cursor-pointer px-6 py-4 ${className} ${
           disabled || loading ? 'opacity-50 pointer-events-none' : ''
         }`
 
     // If href is provided, render a Link component
     if (href) {
       return (
-        <Link href={href} className={`${buttonClasses}`}>
+        <Link
+          href={href}
+          className={`${buttonClasses}`}
+          target={props.target}
+          rel={props.rel}
+        >
           <span className="flex items-center justify-center gap-2">
             {startIcon && <span className="flex-shrink-0">{startIcon}</span>}
             <span>{children}</span>

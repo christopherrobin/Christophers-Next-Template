@@ -1,11 +1,13 @@
 'use client'
 import { ArrowRightCircleIcon } from '@heroicons/react/20/solid'
 import { RocketLaunchIcon } from '@heroicons/react/24/outline'
+import { Link } from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import React, { useEffect } from 'react'
 
 import { Button } from '@/components/Button'
+import { GitHubIcon } from '@/components/GitHubIcon'
 
 export default function Home() {
   const { status } = useSession()
@@ -20,7 +22,7 @@ export default function Home() {
 
   return (
     <div className="grid grid-rows-[10px_1fr_20px] items-center justify-items-center min-h-screen px-6 gap-16 fadeIn">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start sm:w-full md:w-2/3 text-center sm:text-left">
+      <main className="flex flex-col gap-[20px] row-start-2 items-center sm:items-start sm:w-full md:w-2/3 text-center sm:text-left">
         <h1>Howdy.</h1>
         <h2>Christophers-Next-Template</h2>
         <p>
@@ -29,6 +31,16 @@ export default function Home() {
           protected dashboard, and reusable components to kickstart your
           project.
         </p>
+        <div className="flex items-center gap-2">
+          <GitHubIcon className="w-5 h-5 text-white" />
+          <a
+            href="https://github.com/christopherrobin/Christophers-Next-Template"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/christopherrobin/Christophers-Next-Template
+          </a>
+        </div>
         <Button
           href="/join"
           className="self-center mt-2 w-full"

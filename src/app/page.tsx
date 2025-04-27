@@ -37,7 +37,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            github.com/christopherrobin/Christophers-Next-Template
+            @christopherrobin/Christophers-Next-Template
           </a>
         </div>
         <Button

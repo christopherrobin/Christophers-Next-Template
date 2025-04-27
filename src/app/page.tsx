@@ -34,7 +34,7 @@ export default function Home() {
           className="self-center mt-2 w-full"
           endIcon={<RocketLaunchIcon className="w-5 h-5" />}
         >
-          Join Us
+          Join
         </Button>
         <Button
           href="/sign-in"

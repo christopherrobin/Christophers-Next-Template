@@ -1,0 +1,53 @@
+{
+  "name": "christophers-next-template",
+  "version": "1.0.0",
+  "description": "A Next.js template with TypeScript, Tailwind CSS, Prisma, and NextAuth.js.",
+  "author": "Christopher Reynolds",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "clean": "yarn run lint:fix && yarn run format:fix && prettier --write .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "nuke": "rm -rf node_modules && yarn install && yarn run build",
+    "prebuild": "prisma generate",
+    "predev": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.6.0",
+    "bcryptjs": "^3.0.2",
+    "next": "15.3.1",
+    "next-auth": "^4.24.11",
+    "prisma": "^6.6.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "15.3.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}

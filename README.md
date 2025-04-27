@@ -1,7 +1,6 @@
 # Christophers-Next-Template
 
 ![Howdy Preview](public/howdy.png)
-![Dashboard Preview](public/dashboard.png)
 
 ## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
 

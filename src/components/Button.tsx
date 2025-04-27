@@ -37,7 +37,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const buttonClasses = ghost
-      ? `rounded border font-extrabold bg-stone-200 border-blue-500 text-blue-500 hover:bg-[#e3ded3] transition cursor-pointer px-6 py-4 bg-transparent ${className} ${
+      ? `rounded border font-extrabold bg-stone-200 border-blue-500 text-blue-500 hover:border-blue-900 transition cursor-pointer px-6 py-4 bg-transparent ${className} ${
           disabled || loading ? 'opacity-50 pointer-events-none' : ''
         }`
       : `rounded bg-blue-500 text-white font-extrabold hover:bg-blue-900 transition cursor-pointer px-6 py-4 ${className} ${

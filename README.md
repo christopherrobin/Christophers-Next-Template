@@ -6,15 +6,19 @@
 
 **Howdy!** This starter kit is designed for those who want a clean, extensible foundation for building modern, full-stack web applications with authentication using Next.js 15, TypeScript, Prisma, and Tailwind CSS.
 
-## Features
+## Stack
 
 - **Next.js 15** with App Router
 - **TypeScript** for type safety
 - **Prisma** ORM with PostgreSQL
-- **ESLint** and **Prettier** for code quality
-- **NextAuth.js** for authentication (email & password)
 - **Tailwind CSS** for styling
+- **NextAuth.js** for authentication (email & password)
 - **Heroicons** for modern SVG icons
+- **bcrypt** (via bcryptjs) for secure password hashing
+
+## Tooling & Features
+
+- **ESLint** and **Prettier** for code quality
 - **Unit & Component Testing** with Jest & Testing Library
 - **End-to-End (E2E) Testing** with Playwright
 - User registration and login flows
@@ -104,7 +108,6 @@ For more icons and usage details, see the [Heroicons documentation](https://hero
 This project supports two main testing methods:
 
 - **Unit & Component Testing** (Jest + Testing Library):
-
   - Run all tests: `yarn test`
   - Run a specific test file: `yarn test __tests__/Button.test.tsx`
   - Uses [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) and [@testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/) for React component interaction and assertions.

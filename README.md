@@ -4,7 +4,7 @@
 
 ## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
 
-**Welcome!** This starter kit is designed for developers who want a clean, extensible foundation for building modern, full-stack web applications with authentication. Use it as a base for your next SaaS, dashboard, or internal tool. Contributions and forks are encouraged—make it your own!
+**Howdy!** This starter kit is designed for those who want a clean, extensible foundation for building modern, full-stack web applications with authentication using Next.js 15, TypeScript, Prisma, and Tailwind CSS.
 
 ## Features
 
@@ -15,6 +15,8 @@
 - **NextAuth.js** for authentication (email & password)
 - **Tailwind CSS** for styling
 - **Heroicons** for modern SVG icons
+- **Unit & Component Testing** with Jest & Testing Library
+- **End-to-End (E2E) Testing** with Playwright
 - User registration and login flows
 - Protected dashboard for authenticated users
 
@@ -82,29 +84,18 @@ For more icons and usage details, see the [Heroicons documentation](https://hero
 
 ## Testing
 
-### Unit & Component Tests
+This project supports two main testing methods:
 
-- Run all Jest tests:
-  ```bash
-  yarn test
-  ```
-- Watch mode:
-  ```bash
-  yarn test:watch
-  ```
-- Test files live in `__tests__/` and use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
+- **Unit & Component Testing** (Jest + Testing Library):
+  - Run all tests: `yarn test`
+  - Run a specific test file: `yarn test __tests__/Button.test.tsx`
+  - Uses [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) and [@testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/) for React component interaction and assertions.
 
-### End-to-End (E2E) Tests
+- **End-to-End (E2E) Testing** (Playwright):
+  - Run all E2E tests: `yarn test:e2e`
+  - Uses [Playwright](https://playwright.dev/) for browser-based end-to-end testing.
 
-- Start your app locally:
-  ```bash
-  yarn dev
-  ```
-- In another terminal, run Playwright tests:
-  ```bash
-  yarn test:e2e
-  ```
-- E2E tests live in the `e2e/` directory. See [`e2e/README.md`](e2e/README.md) for details.
+See the test files in `__tests__/` and `e2e/` directories for examples.
 
 ## License
 

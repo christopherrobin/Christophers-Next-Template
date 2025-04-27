@@ -60,6 +60,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christopherrobin/Christophers-Next-Template.git"
+  },
   "engines": {
     "node": ">=18.17.0"
   }

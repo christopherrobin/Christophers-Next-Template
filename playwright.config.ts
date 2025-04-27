@@ -1,10 +1,10 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({
   testDir: './e2e',
   timeout: 30 * 1000,
   expect: {
-    timeout: 5000,
+    timeout: 5000
   },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -15,6 +15,6 @@ export default defineConfig({
     actionTimeout: 0,
     trace: 'on-first-retry',
     baseURL: 'http://localhost:3000',
-    ...devices['Desktop Chrome'],
-  },
-});
+    ...devices['Desktop Chrome']
+  }
+})

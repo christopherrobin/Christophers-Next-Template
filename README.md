@@ -61,6 +61,22 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 - `prisma/` — Prisma schema and migrations
 - `public/` — Static assets and icons
 
+## Scripts
+
+- `yarn dev` — Start development server
+- `yarn build` — Build for production
+- `yarn start` — Start production server
+- `yarn prisma:migrate` — Deploy database migrations
+- `yarn lint` / `yarn lint:fix` — Lint code
+- `yarn format` / `yarn format:fix` — Format code
+- `yarn run nuke` — Remove node_modules, reinstall dependencies, and rebuild
+- `yarn run clean` — Lint, format, and prettify all code
+
+## Environment Variables
+
+- `DATABASE_PUBLIC_URL` — PostgreSQL connection string
+- `NEXTAUTH_SECRET` — Secret for NextAuth.js
+
 ## Customization
 
 This template is intentionally minimal. Extend or modify any part to fit your project:
@@ -102,19 +118,3 @@ See the test files in `__tests__/` and `e2e/` directories for examples.
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-## Scripts
-
-- `yarn dev` — Start development server
-- `yarn build` — Build for production
-- `yarn start` — Start production server
-- `yarn prisma:migrate` — Deploy database migrations
-- `yarn lint` / `yarn lint:fix` — Lint code
-- `yarn format` / `yarn format:fix` — Format code
-- `yarn run nuke` — Remove node_modules, reinstall dependencies, and rebuild
-- `yarn run clean` — Lint, format, and prettify all code
-
-## Environment Variables
-
-- `DATABASE_PUBLIC_URL` — PostgreSQL connection string
-- `NEXTAUTH_SECRET` — Secret for NextAuth.js

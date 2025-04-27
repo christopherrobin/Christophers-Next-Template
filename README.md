@@ -64,6 +64,17 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 - `src/lib/` — Prisma and authentication logic
 - `prisma/` — Prisma schema and migrations
 - `public/` — Static assets and icons
+- `__tests__/` — Unit and component tests
+- `e2e/` — End-to-end tests
+
+## Customization
+
+Extend or modify any part to fit your project:
+
+- Add new pages or API routes in `src/app/`
+- Create custom UI components in `src/components/`
+- Adjust authentication logic in `src/lib/auth.ts`
+- Update styles via Tailwind config or CSS
 
 ## Scripts
 
@@ -80,15 +91,6 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
 - `DATABASE_PUBLIC_URL` — PostgreSQL connection string
 - `NEXTAUTH_SECRET` — Secret for NextAuth.js
-
-## Customization
-
-This template is intentionally minimal. Extend or modify any part to fit your project:
-
-- Add new pages or API routes in `src/app/`
-- Create custom UI components in `src/components/`
-- Adjust authentication logic in `src/lib/auth.ts`
-- Update styles via Tailwind config or CSS
 
 ## Using Heroicons
 

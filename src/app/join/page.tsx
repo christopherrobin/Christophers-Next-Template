@@ -65,7 +65,7 @@ export default function Join() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 fadeIn">
-      <h1 className="text-2xl md:text-5xl font-bold text-green-700 mb-8">
+      <h1 className="text-2xl md:text-5xl font-bold text-blue-500 mb-8">
         Join the Club
       </h1>
       <form
@@ -95,7 +95,7 @@ export default function Join() {
       </form>
       <p className="text-gray-700 mt-6">
         Already have an account?{' '}
-        <Link href="/sign-in" className="text-green-700 hover:underline">
+        <Link href="/sign-in" className="text-blue-500 hover:underline">
           Sign In
         </Link>
       </p>

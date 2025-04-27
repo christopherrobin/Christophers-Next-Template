@@ -39,7 +39,7 @@ export default function Home() {
         <Button
           href="/sign-in"
           className="self-center w-full"
-          endIcon={<ArrowRightCircleIcon className="w-5 h-5 text-green-700" />}
+          endIcon={<ArrowRightCircleIcon className="w-5 h-5 text-blue-500" />}
           ghost
         >
           Sign In

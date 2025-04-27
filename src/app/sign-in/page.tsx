@@ -71,7 +71,7 @@ function SignInForm() {
       <div className="mt-4 text-center">
         <p className="text-gray-700 mt-3">
           Don&apos;t have an account?{' '}
-          <Link href="/join" className="text-green-700 hover:underline">
+          <Link href="/join" className="text-blue-500 hover:underline">
             Join now
           </Link>
         </p>
@@ -93,7 +93,7 @@ export default function SignIn() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 fadeIn">
-      <h1 className="text-2xl md:text-5xl font-bold text-green-700 mb-8">
+      <h1 className="text-2xl md:text-5xl font-bold text-blue-500 mb-8">
         Sign In
       </h1>
       <Suspense fallback={<Spinner />}>

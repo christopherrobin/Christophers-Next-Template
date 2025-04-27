@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #e3ded3;
-  --foreground: #111010;
+  --background: var(--color-stone-900);
+  --foreground: #fff;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -29,7 +29,7 @@ body {
 }
 
 p {
-  color: var(--color-gray-800);
+  color: var(--color-white);
 }
 
 .fadeIn {
@@ -46,26 +46,6 @@ p {
   }
 }
 
-/* a {
-  @apply text-green-700;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-a:hover {
-  @apply text-green-900;
-}
-a:focus {
-  @apply text-green-900;
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-foreground);
-}
-a:active {
-  @apply text-green-900;
-}
-a:visited {
-  @apply text-green-700;
-} */
-
 h1,
 h2,
 h3,
@@ -74,7 +54,7 @@ h5,
 h6 {
   font-family: var(--font-sans);
   font-weight: 600;
-  color: var(--color-green-700);
+  color: var(--color-blue-500);
 }
 h1 {
   font-size: 2.3rem;
@@ -83,5 +63,5 @@ h1 {
 h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--color-gray-800);
+  color: var(--color-white);
 }

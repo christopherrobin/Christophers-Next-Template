@@ -32,9 +32,9 @@ export default function Dashboard() {
       <div className="max-w-full grid fadeIn mt-10 mx-6">
         <main className="flex flex-col gap-[10px] row-start-2">
           <h1>Dashboard</h1>
-          <h2 className="font-bold text-green-700">Welcome, {email}</h2>
+          <h2 className="font-bold text-blue-500">Welcome, {email}</h2>
           <div className="flex flex-col gap-4">
-            <pre className="text-sm text-gray-700">
+            <pre className="text-sm text-gray-300">
               <code>
                 {JSON.stringify(
                   {
@@ -56,7 +56,7 @@ export default function Dashboard() {
           </div>
           <Button
             onClick={() => signOut({ callbackUrl: '/' })}
-            className="mt-8 bg-red-500 hover:bg-red-700"
+            className="mt-10"
           >
             Sign Out
           </Button>

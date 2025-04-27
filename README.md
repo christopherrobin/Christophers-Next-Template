@@ -1,6 +1,11 @@
 # Christophers-Next-Template
 
-## A modern, minimal authentication starter built with Next.js, TypeScript, Prisma, and Tailwind CSS.
+![Howdy Preview](public/howdy.png)
+![Dashboard Preview](public/dashboard.png)
+
+## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
+
+**Welcome!** This starter kit is designed for developers who want a clean, extensible foundation for building modern, full-stack web applications with authentication. Use it as a base for your next SaaS, dashboard, or internal tool. Contributions and forks are encouraged—make it your own!
 
 ## Features
 
@@ -15,6 +20,8 @@
 - Protected dashboard for authenticated users
 
 ## Getting Started
+
+Clone and set up the project in minutes:
 
 ### Prerequisites
 
@@ -53,6 +60,14 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 - `prisma/` — Prisma schema and migrations
 - `public/` — Static assets and icons
 
+## Customization
+
+This template is intentionally minimal. Extend or modify any part to fit your project:
+- Add new pages or API routes in `src/app/`
+- Create custom UI components in `src/components/`
+- Adjust authentication logic in `src/lib/auth.ts`
+- Update styles via Tailwind config or CSS
+
 ## Using Heroicons
 
 This project uses [Heroicons](https://heroicons.com/) for modern SVG icons in React components.
@@ -60,11 +75,15 @@ This project uses [Heroicons](https://heroicons.com/) for modern SVG icons in Re
 ### How to Use Heroicons
 
 - The `@heroicons/react` package is installed as a dependency.
-- You can import icons into your components. There are two main styles and sizes:
+- Import icons into your components. There are two main styles and sizes.
 - Use icons as React components, e.g. `<RocketLaunchIcon className="w-5 h-5" />`.
 - The custom `Button` component supports passing icons as `startIcon` or `endIcon` props.
 
 For more icons and usage details, see the [Heroicons documentation](https://heroicons.com/).
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
 
 ## Scripts
 
@@ -81,11 +100,3 @@ For more icons and usage details, see the [Heroicons documentation](https://hero
 
 - `DATABASE_PUBLIC_URL` — PostgreSQL connection string
 - `NEXTAUTH_SECRET` — Secret for NextAuth.js
-
-## License
-
-MIT
-
----
-
-> Welcome to the club.

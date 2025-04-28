@@ -29,12 +29,14 @@ export default function Dashboard() {
 
   if (status === 'authenticated') {
     return (
-      <div className="max-w-full grid fadeIn mt-10 mx-6">
-        <main className="flex flex-col gap-[10px] row-start-2">
-          <h1>Dashboard</h1>
-          <h2 className="font-bold text-blue-500">Welcome, {email}</h2>
-          <div className="flex flex-col gap-4">
-            <pre className="text-sm text-gray-300">
+      <div className="px-4 py-6 fadeIn">
+        <main className="flex flex-col gap-4">
+          <h1 className="text-2xl">Dashboard</h1>
+          <h2 className="font-bold text-blue-500 break-words">
+            Welcome, {email}
+          </h2>
+          <div className="flex flex-col gap-4 w-full">
+            <pre className="text-sm text-gray-300 whitespace-pre-wrap overflow-x-auto bg-stone-800 p-4 rounded-md w-full">
               <code>
                 {JSON.stringify(
                   {
@@ -56,7 +58,7 @@ export default function Dashboard() {
           </div>
           <Button
             onClick={() => signOut({ callbackUrl: '/' })}
-            className="mt-10"
+            className="mt-6 w-full"
           >
             Sign Out
           </Button>

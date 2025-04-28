@@ -24,12 +24,6 @@ export default function Home() {
       <main className="flex flex-col gap-[20px] row-start-2 items-center sm:items-start sm:w-full md:w-2/3 text-center sm:text-left">
         <h1>Howdy.</h1>
         <h2>Christophers-Next-Template</h2>
-        <p>
-          This is a template for Next.js applications with TypeScript, Tailwind
-          CSS, and NextAuth.js. It includes a simple authentication flow, a
-          protected dashboard, and reusable components to kickstart your
-          project.
-        </p>
         <div className="flex items-center gap-2">
           <GitHubIcon className="w-5 h-5 text-white" />
           <a
@@ -37,9 +31,15 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            @christopherrobin/Christophers-Next-Template
+            @christopherrobin
           </a>
         </div>
+        <p>
+          This is a template for Next.js applications with TypeScript, Tailwind
+          CSS, and NextAuth.js. It includes a simple authentication flow, a
+          protected dashboard, and reusable components to kickstart your
+          project.
+        </p>
         <Button
           href="/join"
           className="self-center mt-2 w-full"

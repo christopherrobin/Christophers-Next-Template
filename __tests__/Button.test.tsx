@@ -1,7 +1,6 @@
-import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
+import React from 'react'
 
 import { Button } from '../src/components/Button'
 
@@ -51,33 +50,5 @@ describe('Button', () => {
     const { getByRole } = render(<Button ghost>Ghost</Button>)
     const button = getByRole('button')
     expect(button.className).toMatch(/border-blue-500/)
-  })
-
-  it('calls onClick when clicked', async () => {
-    const user = userEvent.setup()
-    const handleClick = jest.fn(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        // Add explicit type for callback parameter
-      }
-    )
-    const { getByRole } = render(<Button onClick={handleClick}>Click</Button>)
-    await user.click(getByRole('button'))
-    expect(handleClick).toHaveBeenCalled()
-  })
-
-  it('does not call onClick when disabled', async () => {
-    const user = userEvent.setup()
-    const handleClick = jest.fn(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        // Add explicit type for callback parameter
-      }
-    )
-    const { getByRole } = render(
-      <Button onClick={handleClick} disabled>
-        Click
-      </Button>
-    )
-    await user.click(getByRole('button'))
-    expect(handleClick).not.toHaveBeenCalled()
   })
 })

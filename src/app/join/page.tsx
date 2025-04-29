@@ -18,7 +18,7 @@ export default function Join() {
   // Redirect to dashboard if already authenticated
   useEffect(() => {
     if (status === 'authenticated') {
-      router.push('/dashboard')
+      router.replace('/dashboard')
     }
   }, [status, router])
 
@@ -43,7 +43,7 @@ export default function Join() {
           email,
           password,
           redirect: false,
-          callbackUrl: '/dashboard' // Changed from '/' to '/dashboard'
+          callbackUrl: '/dashboard'
         })
 
         if (signInResult?.error) {

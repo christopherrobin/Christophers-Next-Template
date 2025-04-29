@@ -1,4 +1,3 @@
-// src/app/sign-in/page.tsx
 'use client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -87,7 +86,7 @@ export default function SignIn() {
   // Redirect to dashboard if already authenticated
   useEffect(() => {
     if (status === 'authenticated') {
-      router.push('/dashboard')
+      router.replace('/dashboard')
     }
   }, [status, router])
 

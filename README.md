@@ -110,6 +110,7 @@ For more icons and usage details, see the [Heroicons documentation](https://hero
 This project supports two main testing methods:
 
 - **Unit & Component Testing** (Jest + Testing Library):
+
   - Run all tests: `yarn test`
   - Run a specific test file: `yarn test __tests__/Button.test.tsx`
   - Uses [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) and [@testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/) for React component interaction and assertions.

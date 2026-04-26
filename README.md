@@ -30,7 +30,7 @@ Clone and set up the project in minutes:
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22+ (a `.nvmrc` is provided — run `nvm use`)
 - PostgreSQL database
 
 ### Installation
@@ -59,13 +59,15 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
 ## Project Structure
 
-- `src/app/` — Next.js App Router pages (home, join, sign-in, dashboard)
-- `src/components/` — Reusable UI components (Button, Spinner, Providers)
-- `src/lib/` — Prisma and authentication logic
+- `src/app/` — Next.js App Router pages (home, join, sign-in, dashboard, `not-found.tsx`)
+- `src/components/` — Reusable UI components (Button, Input, Spinner, GitHubIcon, Providers)
+- `src/lib/` — Prisma client and NextAuth configuration
+- `src/middleware.ts` — Route protection and auth redirects
 - `prisma/` — Prisma schema and migrations
 - `public/` — Static assets and icons
-- `__tests__/` — Unit and component tests
 - `e2e/` — End-to-end tests
+
+Unit/component tests are co-located next to source files (e.g. `Button.tsx` + `Button.test.tsx`).
 
 ## Customization
 
@@ -90,7 +92,16 @@ Extend or modify any part to fit your project:
 ## Environment Variables
 
 - `DATABASE_PUBLIC_URL` — PostgreSQL connection string
-- `NEXTAUTH_SECRET` — Secret for NextAuth.js
+- `NEXTAUTH_SECRET` — Secret for NextAuth.js (generate with `openssl rand -base64 32`)
+- `NEXTAUTH_URL` — Canonical site URL (e.g. `http://localhost:3000`)
+
+## Authentication & Routing
+
+The included `src/middleware.ts` enforces:
+
+- `/dashboard/*` requires authentication (unauth users are redirected to `/sign-in?callbackUrl=...`)
+- `/sign-in` and `/join` redirect authenticated users to `/dashboard`
+- `/` is public for everyone
 
 ## Using Heroicons
 
@@ -112,14 +123,14 @@ This project supports two main testing methods:
 - **Unit & Component Testing** (Jest + Testing Library):
 
   - Run all tests: `yarn test`
-  - Run a specific test file: `yarn test __tests__/Button.test.tsx`
+  - Run a specific test file: `yarn test src/components/Button.test.tsx`
+  - Tests are co-located next to the components they cover (e.g. `Button.tsx` + `Button.test.tsx`).
   - Uses [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) and [@testing-library/user-event](https://testing-library.com/docs/ecosystem-user-event/) for React component interaction and assertions.
 
 - **End-to-End (E2E) Testing** (Playwright):
   - Run all E2E tests: `yarn test:e2e`
+  - Specs live in the `e2e/` directory.
   - Uses [Playwright](https://playwright.dev/) for browser-based end-to-end testing.
-
-See the test files in `__tests__/` and `e2e/` directories for examples.
 
 ## License
 

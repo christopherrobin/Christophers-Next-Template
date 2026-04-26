@@ -2,28 +2,28 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
-// Middleware to protect /dashboard route
+// Protects /dashboard (requires auth) and redirects authenticated users
+// away from /sign-in and /join to /dashboard.
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET
+  })
 
-  // Only protect /dashboard
-  if (pathname.startsWith('/dashboard')) {
-    // getToken returns null if not authenticated
-    const token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET
-    })
-    if (!token) {
-      // Redirect to sign-in page, preserve intended destination
-      const signInUrl = new URL('/sign-in', request.url)
-      signInUrl.searchParams.set('callbackUrl', request.url)
-      return NextResponse.redirect(signInUrl)
-    }
+  if (token && (pathname === '/sign-in' || pathname === '/join')) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
-  // Allow all other routes
+
+  if (pathname.startsWith('/dashboard') && !token) {
+    const signInUrl = new URL('/sign-in', request.url)
+    signInUrl.searchParams.set('callbackUrl', request.url)
+    return NextResponse.redirect(signInUrl)
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*']
+  matcher: ['/sign-in', '/join', '/dashboard', '/dashboard/:path*']
 }

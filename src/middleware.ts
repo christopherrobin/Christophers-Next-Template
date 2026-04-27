@@ -17,7 +17,10 @@ export async function middleware(request: NextRequest) {
 
   if (pathname.startsWith('/dashboard') && !token) {
     const signInUrl = new URL('/sign-in', request.url)
-    signInUrl.searchParams.set('callbackUrl', request.url)
+    signInUrl.searchParams.set(
+      'callbackUrl',
+      request.nextUrl.pathname + request.nextUrl.search
+    )
     return NextResponse.redirect(signInUrl)
   }
 

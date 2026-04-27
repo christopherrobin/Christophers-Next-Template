@@ -91,7 +91,11 @@ export default function Join() {
         <Button type="submit" loading={loading}>
           {loading ? 'Joining...' : 'Join'}
         </Button>
-        {error && <div className="text-red-500">{error}</div>}
+        {error && (
+          <div className="text-red-500" data-testid="join-error">
+            {error}
+          </div>
+        )}
       </form>
       <p className="text-gray-700 mt-6">
         Already have an account?{' '}

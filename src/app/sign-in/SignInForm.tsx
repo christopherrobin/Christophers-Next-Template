@@ -73,7 +73,11 @@ function SignInForm() {
       <Button type="submit" loading={loading}>
         Sign In
       </Button>
-      {error && <div className="text-red-500">{error}</div>}
+      {error && (
+        <div className="text-red-500" data-testid="sign-in-error">
+          {error}
+        </div>
+      )}
       <div className="mt-4 text-center">
         <p className="text-gray-700 mt-3">
           Don&apos;t have an account?{' '}

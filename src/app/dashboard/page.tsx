@@ -24,7 +24,10 @@ export default function Dashboard() {
           Welcome, {email}
         </h2>
         <div className="flex flex-col gap-4 w-full">
-          <pre className="text-sm text-gray-300 whitespace-pre-wrap overflow-x-auto bg-stone-800 p-4 rounded-md w-full">
+          <pre
+            className="text-sm text-gray-300 whitespace-pre-wrap overflow-x-auto bg-stone-800 p-4 rounded-md w-full"
+            data-testid="session-json"
+          >
             <code>{JSON.stringify(session, null, 2)}</code>
           </pre>
           <Button onClick={() => signOut()}>Sign out</Button>

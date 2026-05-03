@@ -26,6 +26,9 @@ next-env.d.ts
 *.tsbuildinfo
 .swc/
 
+# ---------- ESLint ----------
+.eslintcache
+
 # ---------- Testing: Jest ----------
 /coverage
 

@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt'
 
 // Protects /dashboard (requires auth) and redirects authenticated users
 // away from /sign-in and /join to /dashboard.
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const token = await getToken({
     req: request,

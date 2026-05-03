@@ -3,9 +3,9 @@
  */
 import { hash } from 'bcryptjs'
 
-import { prisma } from '@/lib/prisma'
-
 import { POST } from './route'
+
+import { prisma } from '@/lib/prisma'
 
 jest.mock('@/lib/prisma', () => ({
   prisma: {

@@ -14,6 +14,14 @@ export function errorResponse(message: string, status = 400) {
 }
 
 /**
+ * Validation error response for Zod (or compatible) field errors.
+ * Pass `result.error.flatten().fieldErrors` directly.
+ */
+export function validationError(details: Record<string, string[] | undefined>) {
+  return NextResponse.json({ error: 'Invalid input', details }, { status: 400 })
+}
+
+/**
  * Guard helper for authenticated API routes. Returns the session and
  * userId on success, or an error response to return early.
  *

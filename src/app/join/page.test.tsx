@@ -75,19 +75,19 @@ describe('Join page', () => {
     const user = userEvent.setup()
     render(<Join />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
     await user.click(screen.getByRole('button', { name: 'Join' }))
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith('/api/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: 'a@b.com', password: 'pw' })
+        body: JSON.stringify({ email: 'a@b.com', password: 'CorrectHorse42!' })
       })
     })
     await waitFor(() => {
       expect(mockedSignIn).toHaveBeenCalledWith('credentials', {
         email: 'a@b.com',
-        password: 'pw',
+        password: 'CorrectHorse42!',
         redirect: false,
         callbackUrl: '/dashboard'
       })
@@ -103,7 +103,7 @@ describe('Join page', () => {
     const user = userEvent.setup()
     render(<Join />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
     await user.click(screen.getByRole('button', { name: 'Join' }))
     expect(await screen.findByText('User already exists')).toBeInTheDocument()
     expect(mockedSignIn).not.toHaveBeenCalled()
@@ -115,7 +115,7 @@ describe('Join page', () => {
     const user = userEvent.setup()
     render(<Join />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
     await user.click(screen.getByRole('button', { name: 'Join' }))
     expect(await screen.findByText('Invalid password')).toBeInTheDocument()
   })
@@ -126,7 +126,7 @@ describe('Join page', () => {
     const user = userEvent.setup()
     render(<Join />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
     await user.click(screen.getByRole('button', { name: 'Join' }))
     expect(
       await screen.findByText('An unexpected error occurred')
@@ -150,7 +150,7 @@ describe('Join page', () => {
     const user = userEvent.setup()
     render(<Join />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
     const submit = screen.getByRole('button', { name: 'Join' })
     await user.click(submit)
     await waitFor(() => {

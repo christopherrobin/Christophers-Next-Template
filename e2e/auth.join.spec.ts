@@ -41,7 +41,7 @@ test.describe('join flow', () => {
     await expect(page).toHaveURL(/\/join$/)
   })
 
-  test('empty submit blocked by HTML5 required', async ({ page }) => {
+  test('empty submit shows zod errors and skips network', async ({ page }) => {
     await page.goto('/join')
     let calledJoinApi = false
     page.on('request', (req) => {
@@ -49,11 +49,12 @@ test.describe('join flow', () => {
     })
     await page.getByRole('button', { name: /^Join/ }).click()
     await expect(page).toHaveURL(/\/join$/)
-    const emailInput = page.getByPlaceholder('Email')
-    const isInvalid = await emailInput.evaluate(
-      (el: HTMLInputElement) => !el.validity.valid
+    await expect(page.getByTestId('join-email-error')).toContainText(
+      /email is required/i
     )
-    expect(isInvalid).toBe(true)
+    await expect(page.getByTestId('join-password-error')).toContainText(
+      /at least 8/i
+    )
     expect(calledJoinApi).toBe(false)
   })
 

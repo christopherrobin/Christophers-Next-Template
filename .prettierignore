@@ -1,0 +1,16 @@
+node_modules
+.next
+build
+dist
+coverage
+package-lock.json
+yarn.lock
+.env
+.env.*
+.vercel
+public/**
+next-env.d.ts
+playwright-report
+test-results
+prisma/migrations
+*.log

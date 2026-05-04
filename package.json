@@ -31,7 +31,8 @@
     "next-auth": "^4.24.14",
     "prisma": "^6.19.3",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",

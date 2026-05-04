@@ -19,23 +19,6 @@ const mockedUseRouter = useRouter as jest.Mock
 const mockedUseSession = useSession as jest.Mock
 const mockedSignIn = signIn as jest.Mock
 
-const stubLocation = () => {
-  const original = window.location
-  const replacement = { href: '' } as unknown as Location
-  Object.defineProperty(window, 'location', {
-    configurable: true,
-    writable: true,
-    value: replacement
-  })
-  return () => {
-    Object.defineProperty(window, 'location', {
-      configurable: true,
-      writable: true,
-      value: original
-    })
-  }
-}
-
 const mockFetchOk = (body: unknown) => {
   global.fetch = jest.fn().mockResolvedValueOnce({
     ok: true,
@@ -57,14 +40,16 @@ const mockFetchThrow = () => {
 }
 
 describe('Join page', () => {
+  const push = jest.fn()
+  const refresh = jest.fn()
+  const replace = jest.fn()
+
   beforeEach(() => {
-    mockedUseRouter.mockReturnValue({ replace: jest.fn() })
+    mockedUseRouter.mockReturnValue({ push, replace, refresh })
     mockedUseSession.mockReturnValue({ status: 'unauthenticated', data: null })
   })
 
   it('redirects to /dashboard when authenticated', () => {
-    const replace = jest.fn()
-    mockedUseRouter.mockReturnValue({ replace })
     mockedUseSession.mockReturnValue({
       status: 'authenticated',
       data: { user: { email: 'a@b.com' } }
@@ -87,7 +72,6 @@ describe('Join page', () => {
   it('creates the account and signs in on success', async () => {
     mockFetchOk({ ok: true })
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<Join />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
@@ -109,9 +93,9 @@ describe('Join page', () => {
       })
     })
     await waitFor(() => {
-      expect(window.location.href).toBe('/dashboard')
+      expect(push).toHaveBeenCalledWith('/dashboard')
     })
-    restore()
+    expect(refresh).toHaveBeenCalled()
   })
 
   it('shows the API error and skips signIn when /api/join fails', async () => {
@@ -152,7 +136,6 @@ describe('Join page', () => {
   })
 
   it('disables the button and switches it into loading state while submitting', async () => {
-    const restore = stubLocation()
     let resolveFetch: (value: {
       ok: boolean
       json: () => Promise<unknown>
@@ -180,6 +163,5 @@ describe('Join page', () => {
     await waitFor(() => {
       expect(submit).not.toBeDisabled()
     })
-    restore()
   })
 })

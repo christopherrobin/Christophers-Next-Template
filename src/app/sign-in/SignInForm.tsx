@@ -1,5 +1,5 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 
@@ -15,6 +15,7 @@ function isSafeRelativePath(value: string | null): value is string {
 }
 
 function SignInForm() {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -39,7 +40,8 @@ function SignInForm() {
       if (result?.error) {
         setError(result.error)
       } else if (result?.url) {
-        window.location.href = callbackUrl
+        router.push(callbackUrl)
+        router.refresh()
       }
     } catch (err) {
       console.error('Sign in error:', err)

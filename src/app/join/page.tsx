@@ -49,8 +49,8 @@ export default function Join() {
         if (signInResult?.error) {
           setError(signInResult.error)
         } else if (signInResult?.url) {
-          // Manually navigate to dashboard
-          window.location.href = signInResult.url
+          router.push('/dashboard')
+          router.refresh()
         }
       } else {
         setError(data.error || 'Failed to create account')

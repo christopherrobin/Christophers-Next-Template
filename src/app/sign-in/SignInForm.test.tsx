@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import React from 'react'
 
@@ -11,31 +11,20 @@ jest.mock('next-auth/react', () => ({
 }))
 
 jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
   useSearchParams: jest.fn()
 }))
 
 const mockedSignIn = signIn as jest.Mock
+const mockedUseRouter = useRouter as jest.Mock
 const mockedUseSearchParams = useSearchParams as jest.Mock
 
-const stubLocation = () => {
-  const original = window.location
-  const replacement = { href: '' } as unknown as Location
-  Object.defineProperty(window, 'location', {
-    configurable: true,
-    writable: true,
-    value: replacement
-  })
-  return () => {
-    Object.defineProperty(window, 'location', {
-      configurable: true,
-      writable: true,
-      value: original
-    })
-  }
-}
-
 describe('SignInForm', () => {
+  const push = jest.fn()
+  const refresh = jest.fn()
+
   beforeEach(() => {
+    mockedUseRouter.mockReturnValue({ push, refresh })
     mockedUseSearchParams.mockReturnValue(new URLSearchParams(''))
   })
 
@@ -50,7 +39,6 @@ describe('SignInForm', () => {
 
   it('submits the form with credentials', async () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<SignInForm />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
@@ -64,7 +52,6 @@ describe('SignInForm', () => {
         callbackUrl: '/dashboard'
       })
     })
-    restore()
   })
 
   it('forwards a safe relative callbackUrl from the query string', async () => {
@@ -72,7 +59,6 @@ describe('SignInForm', () => {
       new URLSearchParams('callbackUrl=/dashboard/settings')
     )
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard/settings' })
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<SignInForm />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
@@ -86,7 +72,6 @@ describe('SignInForm', () => {
         callbackUrl: '/dashboard/settings'
       })
     })
-    restore()
   })
 
   it('falls back to /dashboard when callbackUrl is an absolute URL', async () => {
@@ -94,7 +79,6 @@ describe('SignInForm', () => {
       new URLSearchParams('callbackUrl=https://evil.com/x')
     )
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<SignInForm />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
@@ -108,7 +92,6 @@ describe('SignInForm', () => {
         callbackUrl: '/dashboard'
       })
     })
-    restore()
   })
 
   it('falls back to /dashboard when callbackUrl is protocol-relative', async () => {
@@ -116,7 +99,6 @@ describe('SignInForm', () => {
       new URLSearchParams('callbackUrl=//evil.com/x')
     )
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<SignInForm />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
@@ -130,7 +112,6 @@ describe('SignInForm', () => {
         callbackUrl: '/dashboard'
       })
     })
-    restore()
   })
 
   it('shows the error returned by signIn', async () => {
@@ -143,18 +124,17 @@ describe('SignInForm', () => {
     expect(await screen.findByText('Invalid password')).toBeInTheDocument()
   })
 
-  it('navigates to the returned url on success', async () => {
+  it('navigates to the validated callbackUrl on success', async () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<SignInForm />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
     await user.type(screen.getByPlaceholderText('Password'), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     await waitFor(() => {
-      expect(window.location.href).toBe('/dashboard')
+      expect(push).toHaveBeenCalledWith('/dashboard')
     })
-    restore()
+    expect(refresh).toHaveBeenCalled()
   })
 
   it('disables the submit button while submitting', async () => {
@@ -165,7 +145,6 @@ describe('SignInForm', () => {
           resolveSignIn = resolve
         })
     )
-    const restore = stubLocation()
     const user = userEvent.setup()
     render(<SignInForm />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
@@ -179,7 +158,6 @@ describe('SignInForm', () => {
     await waitFor(() => {
       expect(submit).not.toBeDisabled()
     })
-    restore()
   })
 
   it('renders a generic error and logs when signIn throws', async () => {

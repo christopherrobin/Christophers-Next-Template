@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       if (token && session.user) {
-        if (!token.sub) throw new Error('No user found')
+        if (!token.sub) throw new Error('Invalid session')
         session.user.id = token.sub
         session.user.emailVerified = token.emailVerified
         session.user.updatedAt = token.updatedAt

@@ -171,7 +171,7 @@ describe('authOptions.callbacks.session', () => {
         session: { user: { email: 'a@b.com' } },
         token: {}
       } as unknown as Parameters<typeof session>[0])
-    ).rejects.toThrow('No user found')
+    ).rejects.toThrow('Invalid session')
   })
 
   it('merges id, emailVerified, createdAt, updatedAt onto session.user', async () => {

@@ -73,3 +73,6 @@ yarn-error.log*
 *.key
 *.p12
 *.cert
+
+# ---------- Local-only Claude Code notes ----------
+CLAUDE.local.md

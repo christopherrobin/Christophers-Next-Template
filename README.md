@@ -4,15 +4,16 @@
 
 ## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
 
-**Howdy!** This starter kit is designed for those who want a clean, extensible foundation for building modern, full-stack web applications with authentication using Next.js 15, TypeScript, Prisma, and Tailwind CSS.
+**Howdy!** This starter kit is designed for those who want a clean, extensible foundation for building modern, full-stack web applications with authentication using Next.js 16, TypeScript, Prisma, and Tailwind CSS.
 
 ## Stack
 
-- **Next.js 15** with App Router
-- **TypeScript** for type safety
-- **Prisma** ORM with PostgreSQL
-- **Tailwind CSS** for styling
-- **NextAuth.js** for authentication (email & password)
+- **Next.js 16** with App Router (Turbopack default)
+- **React 19**, **TypeScript 6** (strict)
+- **Prisma 6** with PostgreSQL
+- **Tailwind CSS 4** for styling
+- **NextAuth.js 4** for authentication (email & password, JWT sessions)
+- **Zod + react-hook-form** for form validation (shared client/server schemas)
 - **Heroicons** for modern SVG icons
 - **bcrypt** (via bcryptjs) for secure password hashing
 
@@ -30,7 +31,7 @@ Clone and set up the project in minutes:
 
 ### Prerequisites
 
-- Node.js 22+ (a `.nvmrc` is provided — run `nvm use`)
+- Node.js 24+ (a `.nvmrc` is provided — run `nvm use`)
 - PostgreSQL database
 
 ### Installation
@@ -61,8 +62,8 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
 - `src/app/` — Next.js App Router pages (home, sign-up, sign-in, dashboard, `not-found.tsx`)
 - `src/components/` — Reusable UI components (Button, Input, Spinner, GitHubIcon, Providers)
-- `src/lib/` — Prisma client and NextAuth configuration
-- `src/middleware.ts` — Route protection and auth redirects
+- `src/lib/` — Prisma client, NextAuth config, env validation (`env.ts`), API helpers (`api-utils.ts`), shared Zod schemas (`schemas.ts`)
+- `src/proxy.ts` — Next 16 middleware (route protection and auth redirects)
 - `prisma/` — Prisma schema and migrations
 - `public/` — Static assets and icons
 - `e2e/` — End-to-end tests
@@ -97,11 +98,15 @@ Extend or modify any part to fit your project:
 
 ## Authentication & Routing
 
-The included `src/middleware.ts` enforces:
+The included `src/proxy.ts` (Next 16's renamed middleware) enforces:
 
 - `/dashboard/*` requires authentication (unauth users are redirected to `/sign-in?callbackUrl=...`)
 - `/sign-in` and `/sign-up` redirect authenticated users to `/dashboard`
 - `/` is public for everyone
+
+## Forms & Validation
+
+Sign-in and sign-up forms use **react-hook-form + Zod** via `zodResolver`. Schemas live in `src/lib/schemas.ts` and are used by both the client form and the server-side `safeParse` in `/api/sign-up/route.ts` — one source of truth, type-inferred via `z.infer`. Forms set `noValidate` so RHF owns validation (not native HTML5).
 
 ## Using Heroicons
 

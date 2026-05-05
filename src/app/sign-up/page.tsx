@@ -69,6 +69,7 @@ export default function SignUp() {
         <div className="flex flex-col gap-1">
           <Input
             type="email"
+            label="Email"
             placeholder="Email"
             autoComplete="email"
             aria-invalid={!!errors.email}
@@ -88,6 +89,7 @@ export default function SignUp() {
         <div className="flex flex-col gap-1">
           <Input
             type="password"
+            label="Password"
             placeholder="Password"
             autoComplete="new-password"
             aria-invalid={!!errors.password}

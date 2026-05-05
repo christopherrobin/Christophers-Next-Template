@@ -13,6 +13,26 @@ describe('Input', () => {
     expect(input.className).toMatch(/bg-white/)
   })
 
+  it('renders an associated label when the `label` prop is provided', () => {
+    render(<Input label="Email" placeholder="Email" />)
+    const input = screen.getByLabelText('Email')
+    expect(input).toBeInstanceOf(HTMLInputElement)
+    const label = screen.getByText('Email')
+    expect(label.tagName).toBe('LABEL')
+    expect(label).toHaveAttribute('for', input.id)
+  })
+
+  it('visually hides the label when `hideLabel` is true', () => {
+    render(<Input label="Email" hideLabel placeholder="Email" />)
+    const label = screen.getByText('Email')
+    expect(label.className).toMatch(/sr-only|absolute/)
+  })
+
+  it('omits the label element when no `label` prop is given', () => {
+    render(<Input placeholder="Email" />)
+    expect(screen.queryByText('Email', { selector: 'label' })).toBeNull()
+  })
+
   it('forwards the ref to the underlying input element', () => {
     const ref = React.createRef<HTMLInputElement>()
     render(<Input ref={ref} placeholder="Email" />)

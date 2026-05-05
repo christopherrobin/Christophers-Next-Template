@@ -14,8 +14,8 @@ test.describe('sign-in flow', () => {
     page
   }) => {
     await page.goto('/sign-in')
-    await page.getByPlaceholder('Email').fill(TEST_EMAIL)
-    await page.getByPlaceholder('Password').fill(TEST_PASSWORD)
+    await page.getByLabel(/email/i).fill(TEST_EMAIL)
+    await page.getByLabel(/password/i).fill(TEST_PASSWORD)
     await page.getByRole('button', { name: 'Sign In' }).click()
     await page.waitForURL('**/dashboard')
     await expect(
@@ -27,8 +27,8 @@ test.describe('sign-in flow', () => {
     page
   }) => {
     await page.goto('/sign-in')
-    await page.getByPlaceholder('Email').fill(TEST_EMAIL)
-    await page.getByPlaceholder('Password').fill('WrongPassword!')
+    await page.getByLabel(/email/i).fill(TEST_EMAIL)
+    await page.getByLabel(/password/i).fill('WrongPassword!')
     await page.getByRole('button', { name: 'Sign In' }).click()
     await expect(page.getByText('Invalid email or password')).toBeVisible()
     await expect(page).toHaveURL(/\/sign-in$/)
@@ -36,8 +36,8 @@ test.describe('sign-in flow', () => {
 
   test('unknown user shows Invalid email or password', async ({ page }) => {
     await page.goto('/sign-in')
-    await page.getByPlaceholder('Email').fill('ghost@nowhere.dev')
-    await page.getByPlaceholder('Password').fill('Whatever123!')
+    await page.getByLabel(/email/i).fill('ghost@nowhere.dev')
+    await page.getByLabel(/password/i).fill('Whatever123!')
     await page.getByRole('button', { name: 'Sign In' }).click()
     await expect(page.getByText('Invalid email or password')).toBeVisible()
     await expect(page).toHaveURL(/\/sign-in$/)

@@ -30,8 +30,8 @@ describe('SignInForm', () => {
 
   it('renders email, password, submit, and a link to /sign-up', () => {
     render(<SignInForm />)
-    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument()
     const signUpLink = screen.getByRole('link', { name: /sign up/i })
     expect(signUpLink).toHaveAttribute('href', '/sign-up')
@@ -41,8 +41,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     await waitFor(() => {
       expect(mockedSignIn).toHaveBeenCalledWith('credentials', {
@@ -61,8 +61,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard/settings' })
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     await waitFor(() => {
       expect(mockedSignIn).toHaveBeenCalledWith('credentials', {
@@ -81,8 +81,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     await waitFor(() => {
       expect(mockedSignIn).toHaveBeenCalledWith('credentials', {
@@ -101,8 +101,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     await waitFor(() => {
       expect(mockedSignIn).toHaveBeenCalledWith('credentials', {
@@ -118,8 +118,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockResolvedValueOnce({ error: 'Invalid password' })
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'wrong')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'wrong')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     expect(await screen.findByText('Invalid password')).toBeInTheDocument()
   })
@@ -128,8 +128,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     await waitFor(() => {
       expect(push).toHaveBeenCalledWith('/dashboard')
@@ -147,8 +147,8 @@ describe('SignInForm', () => {
     )
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     const submit = screen.getByRole('button', { name: /sign in/i })
     await user.click(submit)
     await waitFor(() => {
@@ -165,8 +165,8 @@ describe('SignInForm', () => {
     mockedSignIn.mockRejectedValueOnce(new Error('network'))
     const user = userEvent.setup()
     render(<SignInForm />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'pw')
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'pw')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
     expect(
       await screen.findByText('An unexpected error occurred')

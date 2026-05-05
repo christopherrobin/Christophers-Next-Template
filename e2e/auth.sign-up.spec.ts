@@ -17,8 +17,8 @@ test.describe('sign-up flow', () => {
     const password = 'BrandNew42!'
 
     await page.goto('/sign-up')
-    await page.getByPlaceholder('Email').fill(newEmail)
-    await page.getByPlaceholder('Password').fill(password)
+    await page.getByLabel(/email/i).fill(newEmail)
+    await page.getByLabel(/password/i).fill(password)
     await page.getByRole('button', { name: /^Sign Up/ }).click()
     await page.waitForURL('**/dashboard')
     await expect(
@@ -34,8 +34,8 @@ test.describe('sign-up flow', () => {
     page
   }) => {
     await page.goto('/sign-up')
-    await page.getByPlaceholder('Email').fill(EXISTING_EMAIL)
-    await page.getByPlaceholder('Password').fill('AnyPassword42!')
+    await page.getByLabel(/email/i).fill(EXISTING_EMAIL)
+    await page.getByLabel(/password/i).fill('AnyPassword42!')
     await page.getByRole('button', { name: /^Sign Up/ }).click()
     await expect(page.getByText('User already exists')).toBeVisible()
     await expect(page).toHaveURL(/\/sign-up$/)

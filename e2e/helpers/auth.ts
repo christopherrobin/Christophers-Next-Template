@@ -6,8 +6,8 @@ export async function signIn(
   password: string
 ): Promise<void> {
   await page.goto('/sign-in')
-  await page.getByPlaceholder('Email').fill(email)
-  await page.getByPlaceholder('Password').fill(password)
+  await page.getByLabel(/email/i).fill(email)
+  await page.getByLabel(/password/i).fill(password)
   await page.getByRole('button', { name: 'Sign In' }).click()
   await page.waitForURL('**/dashboard')
   await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible()

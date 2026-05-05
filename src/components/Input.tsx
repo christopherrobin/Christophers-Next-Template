@@ -1,17 +1,37 @@
-import React from 'react'
+import React, { useId } from 'react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string
+  label?: string
+  hideLabel?: boolean
 }
 
+const VISUALLY_HIDDEN =
+  'absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0'
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className = '', ...props }, ref) => {
+  ({ className = '', label, hideLabel = false, id, ...props }, ref) => {
+    const generatedId = useId()
+    const inputId = id ?? generatedId
     return (
-      <input
-        ref={ref}
-        className={`p-4 rounded shadow-xs bg-white text-gray-800 ${className}`.trim()}
-        {...props}
-      />
+      <>
+        {label && (
+          <label
+            htmlFor={inputId}
+            className={
+              hideLabel ? VISUALLY_HIDDEN : 'text-sm text-gray-200 mb-1'
+            }
+          >
+            {label}
+          </label>
+        )}
+        <input
+          ref={ref}
+          id={inputId}
+          className={`p-4 rounded shadow-xs bg-white text-gray-800 ${className}`.trim()}
+          {...props}
+        />
+      </>
     )
   }
 )

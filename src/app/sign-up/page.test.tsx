@@ -48,8 +48,8 @@ describe('SignUp page', () => {
 
   it('renders the form fields, submit button, and link to /sign-in', () => {
     render(<SignUp />)
-    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Sign In' })).toHaveAttribute(
       'href',
@@ -62,11 +62,8 @@ describe('SignUp page', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
     render(<SignUp />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(
-      screen.getByPlaceholderText('Password'),
-      'ChrisIsTheBest42!'
-    )
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'ChrisIsTheBest42!')
     await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith('/api/sign-up', {
@@ -96,11 +93,8 @@ describe('SignUp page', () => {
     mockFetchError({ error: 'User already exists' })
     const user = userEvent.setup()
     render(<SignUp />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(
-      screen.getByPlaceholderText('Password'),
-      'ChrisIsTheBest42!'
-    )
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'ChrisIsTheBest42!')
     await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     expect(await screen.findByText('User already exists')).toBeInTheDocument()
     expect(mockedSignIn).not.toHaveBeenCalled()
@@ -111,11 +105,8 @@ describe('SignUp page', () => {
     mockedSignIn.mockResolvedValueOnce({ error: 'Invalid password' })
     const user = userEvent.setup()
     render(<SignUp />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(
-      screen.getByPlaceholderText('Password'),
-      'ChrisIsTheBest42!'
-    )
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'ChrisIsTheBest42!')
     await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     expect(await screen.findByText('Invalid password')).toBeInTheDocument()
   })
@@ -125,11 +116,8 @@ describe('SignUp page', () => {
     mockFetchThrow()
     const user = userEvent.setup()
     render(<SignUp />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(
-      screen.getByPlaceholderText('Password'),
-      'ChrisIsTheBest42!'
-    )
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'ChrisIsTheBest42!')
     await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     expect(
       await screen.findByText('An unexpected error occurred')
@@ -152,11 +140,8 @@ describe('SignUp page', () => {
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
     render(<SignUp />)
-    await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(
-      screen.getByPlaceholderText('Password'),
-      'ChrisIsTheBest42!'
-    )
+    await user.type(screen.getByLabelText(/email/i), 'a@b.com')
+    await user.type(screen.getByLabelText(/password/i), 'ChrisIsTheBest42!')
     const submit = screen.getByRole('button', { name: 'Sign Up' })
     await user.click(submit)
     await waitFor(() => {

@@ -3,6 +3,8 @@ import { compare } from 'bcryptjs'
 import { authOptions } from './auth'
 import { prisma } from './prisma'
 
+import { makeUser } from '@/test-utils/factories'
+
 jest.mock('@/lib/prisma', () => ({
   prisma: {
     user: {
@@ -33,21 +35,21 @@ describe('authOptions.providers[0].authorize', () => {
   it('throws when email is missing', async () => {
     const authorize = getAuthorize()
     await expect(authorize({ password: 'pw' })).rejects.toThrow(
-      'Missing email or password'
+      'Invalid email or password'
     )
   })
 
   it('throws when password is missing', async () => {
     const authorize = getAuthorize()
     await expect(authorize({ email: 'a@b.com' })).rejects.toThrow(
-      'Missing email or password'
+      'Invalid email or password'
     )
   })
 
   it('throws when credentials are undefined', async () => {
     const authorize = getAuthorize()
     await expect(authorize(undefined)).rejects.toThrow(
-      'Missing email or password'
+      'Invalid email or password'
     )
   })
 
@@ -60,14 +62,15 @@ describe('authOptions.providers[0].authorize', () => {
   })
 
   it('throws when password does not match', async () => {
-    mockedFindUnique.mockResolvedValueOnce({
-      id: '1',
-      email: 'a@b.com',
-      password: 'hashed',
-      createdAt: new Date('2025-01-01T00:00:00.000Z'),
-      updatedAt: new Date('2025-01-02T00:00:00.000Z'),
-      emailVerified: null
-    })
+    mockedFindUnique.mockResolvedValueOnce(
+      makeUser({
+        id: '1',
+        email: 'a@b.com',
+        password: 'hashed',
+        createdAt: new Date('2025-01-01T00:00:00.000Z'),
+        updatedAt: new Date('2025-01-02T00:00:00.000Z')
+      })
+    )
     mockedCompare.mockResolvedValueOnce(false)
     const authorize = getAuthorize()
     await expect(
@@ -79,14 +82,16 @@ describe('authOptions.providers[0].authorize', () => {
     const created = new Date('2025-01-01T00:00:00.000Z')
     const updated = new Date('2025-01-02T00:00:00.000Z')
     const verified = new Date('2025-01-03T00:00:00.000Z')
-    mockedFindUnique.mockResolvedValueOnce({
-      id: '42',
-      email: 'a@b.com',
-      password: 'hashed',
-      createdAt: created,
-      updatedAt: updated,
-      emailVerified: verified
-    })
+    mockedFindUnique.mockResolvedValueOnce(
+      makeUser({
+        id: '42',
+        email: 'a@b.com',
+        password: 'hashed',
+        createdAt: created,
+        updatedAt: updated,
+        emailVerified: verified
+      })
+    )
     mockedCompare.mockResolvedValueOnce(true)
     const authorize = getAuthorize()
     const result = await authorize({ email: 'a@b.com', password: 'pw' })
@@ -103,14 +108,16 @@ describe('authOptions.providers[0].authorize', () => {
   it('returns null emailVerified when unverified', async () => {
     const created = new Date('2025-01-01T00:00:00.000Z')
     const updated = new Date('2025-01-02T00:00:00.000Z')
-    mockedFindUnique.mockResolvedValueOnce({
-      id: '7',
-      email: 'a@b.com',
-      password: 'hashed',
-      createdAt: created,
-      updatedAt: updated,
-      emailVerified: null
-    })
+    mockedFindUnique.mockResolvedValueOnce(
+      makeUser({
+        id: '7',
+        email: 'a@b.com',
+        password: 'hashed',
+        createdAt: created,
+        updatedAt: updated,
+        emailVerified: null
+      })
+    )
     mockedCompare.mockResolvedValueOnce(true)
     const authorize = getAuthorize()
     const result = (await authorize({

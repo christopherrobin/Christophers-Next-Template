@@ -63,6 +63,7 @@ function SignInForm() {
       <div className="flex flex-col gap-1">
         <Input
           type="email"
+          label="Email"
           placeholder="Email"
           autoComplete="email"
           aria-invalid={!!errors.email}
@@ -82,6 +83,7 @@ function SignInForm() {
       <div className="flex flex-col gap-1">
         <Input
           type="password"
+          label="Password"
           placeholder="Password"
           autoComplete="current-password"
           aria-invalid={!!errors.password}

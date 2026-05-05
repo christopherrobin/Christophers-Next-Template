@@ -1,5 +1,6 @@
 import { execSync } from 'node:child_process'
 
+import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@prisma/client'
 
 async function globalSetup() {
@@ -20,9 +21,8 @@ async function globalSetup() {
     env: { ...process.env, DATABASE_PUBLIC_URL: databaseUrl }
   })
 
-  const prisma = new PrismaClient({
-    datasources: { db: { url: databaseUrl } }
-  })
+  const adapter = new PrismaPg({ connectionString: databaseUrl })
+  const prisma = new PrismaClient({ adapter })
   try {
     await prisma.$executeRawUnsafe(
       'TRUNCATE TABLE "User" RESTART IDENTITY CASCADE'

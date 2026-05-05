@@ -1,12 +1,12 @@
+import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient, type User } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
-const databaseUrl =
+const connectionString =
   process.env.DATABASE_TEST_URL ?? process.env.DATABASE_PUBLIC_URL
 
-const prisma = new PrismaClient({
-  datasources: databaseUrl ? { db: { url: databaseUrl } } : undefined
-})
+const adapter = new PrismaPg({ connectionString })
+const prisma = new PrismaClient({ adapter })
 
 export interface SeedUserInput {
   email: string

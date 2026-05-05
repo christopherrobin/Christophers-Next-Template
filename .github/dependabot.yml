@@ -27,13 +27,6 @@ updates:
       - dependency-name: '@types/node'
         update-types:
           - 'version-update:semver-major'
-      # Has DB schema implications — own phase
-      - dependency-name: 'prisma'
-        update-types:
-          - 'version-update:semver-major'
-      - dependency-name: '@prisma/client'
-        update-types:
-          - 'version-update:semver-major'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:

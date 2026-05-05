@@ -90,14 +90,6 @@ const stack = [
       'https://img.shields.io/badge/Prisma-6-2D3748?style=for-the-badge&logo=prisma&logoColor=white',
     url: 'https://www.prisma.io/',
     blurb: 'Type-safe ORM, schema migrations, ACID Postgres backend.'
-  },
-  {
-    name: 'NextAuth.js',
-    version: '4',
-    badge:
-      'https://img.shields.io/badge/NextAuth.js-4-000000?style=for-the-badge&logo=auth0&logoColor=white',
-    url: 'https://next-auth.js.org/',
-    blurb: 'Credentials provider, JWT sessions, bcryptjs hashing.'
   }
 ]
 

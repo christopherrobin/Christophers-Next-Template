@@ -15,7 +15,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![NextAuth.js](https://img.shields.io/badge/NextAuth.js-4-000000?style=for-the-badge&logo=auth0&logoColor=white)](https://next-auth.js.org/)
 
-![Howdy Preview](public/howdy.png)
+![Welcome Preview](public/welcome.png)
 
 ## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
 

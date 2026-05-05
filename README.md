@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/christopherrobin/Christophers-Next-Template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/christopherrobin/Christophers-Next-Template/actions/workflows/ci.yml)
 [![Tested with Jest](https://img.shields.io/badge/tested_with-jest-99425B?style=flat-square&logo=jest&logoColor=white)](https://jestjs.io/)
-[![E2E with Playwright](https://img.shields.io/badge/e2e_with-playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)](https://playwright.dev/)
-[![Coverage](https://img.shields.io/badge/coverage-90%25_threshold-4c1?style=flat-square)](https://github.com/christopherrobin/Christophers-Next-Template/blob/main/jest.config.ts)
+[![E2E with Playwright](https://img.shields.io/badge/e2e_with-playwright-2E7D32?style=flat-square&logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Coverage](https://img.shields.io/badge/coverage-90%25_threshold-informational?style=flat-square)](https://github.com/christopherrobin/Christophers-Next-Template/blob/main/jest.config.ts)
 [![ESLint](https://img.shields.io/badge/eslint-flat_config-4B32C3?style=flat-square&logo=eslint&logoColor=white)](https://github.com/christopherrobin/Christophers-Next-Template/blob/main/eslint.config.mjs)
 [![Prettier](https://img.shields.io/badge/code_style-prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black)](https://github.com/christopherrobin/Christophers-Next-Template/blob/main/.prettierrc)
 

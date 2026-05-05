@@ -15,6 +15,7 @@
     "lint": "eslint --cache --max-warnings=0 \"src/**/*.{ts,tsx}\" \"e2e/**/*.{ts,tsx}\"",
     "lint:fix": "eslint --cache --fix \"src/**/*.{ts,tsx}\" \"e2e/**/*.{ts,tsx}\"",
     "nuke": "rm -rf node_modules && yarn install && yarn run build",
+    "prepare": "simple-git-hooks || true",
     "prebuild": "prisma generate",
     "predev": "prisma generate",
     "prisma:migrate": "prisma migrate deploy",
@@ -58,15 +59,29 @@
     "eslint-plugin-import-x": "^4.16.2",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.6.0",
-    "typescript-eslint": "^8.59.1",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
+    "lint-staged": "^16.4.0",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
+    "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.2.4",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,yml,yaml}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",

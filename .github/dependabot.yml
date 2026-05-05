@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    open-pull-requests-limit: 5
+    groups:
+      dev-dependencies:
+        dependency-type: 'development'
+      production-dependencies:
+        dependency-type: 'production'
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      # Blocked by eslint-plugin-react@7.37.5 peer ^9.7
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
+      # Has DB schema implications — own phase
+      - dependency-name: 'prisma'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@prisma/client'
+        update-types:
+          - 'version-update:semver-major'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'

@@ -23,7 +23,7 @@ export default defineConfig({
   webServer: {
     command: 'yarn dev',
     url: 'http://localhost:3000',
-    reuseExistingServer: false,
+    reuseExistingServer: !process.env.CI,
     timeout: 120_000,
     env: {
       ...(process.env as Record<string, string>),

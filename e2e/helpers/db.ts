@@ -2,8 +2,15 @@ import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient, type User } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
-const connectionString =
-  process.env.DATABASE_TEST_URL ?? process.env.DATABASE_PUBLIC_URL
+const connectionString = process.env.DATABASE_TEST_URL
+
+if (!connectionString) {
+  throw new Error(
+    '[e2e] DATABASE_TEST_URL is required. Set it in .env.test (see ' +
+      '.env.test.example) or your shell. Refusing to fall back to ' +
+      'DATABASE_PUBLIC_URL — that would truncate your dev database.'
+  )
+}
 
 const adapter = new PrismaPg({ connectionString })
 const prisma = new PrismaClient({ adapter })

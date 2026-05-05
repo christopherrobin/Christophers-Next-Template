@@ -21,6 +21,12 @@ export async function POST(req: NextRequest) {
 
     const existing = await prisma.user.findUnique({ where: { email } })
     if (existing) {
+      // Hash a throwaway value to flatten the response-time signal between
+      // 'duplicate' and 'new account' paths. Without this, an attacker can
+      // enumerate registered emails by measuring how long this endpoint
+      // takes to respond (bcrypt cost-12 is ~250 ms vs. the immediate-return
+      // duplicate path).
+      await hash(password, 12)
       return errorResponse('User already exists')
     }
     const hashed = await hash(password, 12)

@@ -1,19 +1,28 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { postCredentialsSignIn } from '@/lib/auth-helpers'
 import { signInSchema, type SignInInput } from '@/lib/schemas'
 
+// Strict relative-path validator for the post-signin callbackUrl param.
+// Rejects:
+//   - missing / non-string
+//   - protocol-relative (//evil.com)
+//   - backslash-prefixed (some browsers normalize \ to /)
+//   - any backslash, CRLF, or colon (header-splitting / scheme injection)
+//   - non-leading-slash values
 function isSafeRelativePath(value: string | null): value is string {
   if (!value) return false
   if (!value.startsWith('/')) return false
   if (value.startsWith('//')) return false
   if (value.startsWith('/\\')) return false
+  if (/[\\\r\n]/.test(value)) return false
+  if (value.includes(':')) return false
   return true
 }
 
@@ -35,23 +44,13 @@ function SignInForm() {
     const requested = searchParams.get('callbackUrl')
     const callbackUrl = isSafeRelativePath(requested) ? requested : '/dashboard'
 
-    try {
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-        callbackUrl
-      })
-      if (result?.error) {
-        setServerError(result.error)
-      } else if (result?.url) {
-        router.push(callbackUrl)
-        router.refresh()
-      }
-    } catch (err) {
-      console.error('Sign in error:', err)
-      setServerError('An unexpected error occurred')
+    const result = await postCredentialsSignIn(email, password, callbackUrl)
+    if (!result.ok) {
+      setServerError(result.error)
+      return
     }
+    router.push(callbackUrl)
+    router.refresh()
   }
 
   return (

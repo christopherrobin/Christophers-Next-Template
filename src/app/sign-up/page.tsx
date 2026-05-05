@@ -2,12 +2,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { postCredentialsSignIn } from '@/lib/auth-helpers'
 import { signUpSchema, type SignUpInput } from '@/lib/schemas'
 
 export default function SignUp() {
@@ -33,23 +33,18 @@ export default function SignUp() {
 
       const data = await res.json()
 
-      if (res.ok) {
-        const signInResult = await signIn('credentials', {
-          email,
-          password,
-          redirect: false,
-          callbackUrl: '/dashboard'
-        })
-
-        if (signInResult?.error) {
-          setServerError(signInResult.error)
-        } else if (signInResult?.url) {
-          router.push('/dashboard')
-          router.refresh()
-        }
-      } else {
+      if (!res.ok) {
         setServerError(data.error || 'Failed to create account')
+        return
       }
+
+      const result = await postCredentialsSignIn(email, password)
+      if (!result.ok) {
+        setServerError(result.error)
+        return
+      }
+      router.push('/dashboard')
+      router.refresh()
     } catch (err) {
       console.error('Sign-up error:', err)
       setServerError('An unexpected error occurred')

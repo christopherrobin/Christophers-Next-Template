@@ -16,6 +16,16 @@ export default defineConfig({
     path: path.join('prisma', 'migrations')
   },
   datasource: {
-    url: process.env.DATABASE_PUBLIC_URL ?? ''
+    url: (() => {
+      const url = process.env.DATABASE_PUBLIC_URL
+      if (!url) {
+        throw new Error(
+          '[prisma] DATABASE_PUBLIC_URL is required. Copy .env.local.example ' +
+            'to .env.local and set the connection string before running ' +
+            'prisma migrate / generate / studio.'
+        )
+      }
+      return url
+    })()
   }
 })

@@ -22,6 +22,8 @@ export default async function Dashboard() {
           Welcome, {email}
         </h2>
         <div className="flex flex-col gap-4 w-full">
+          {/* TODO: remove this debug session dump for production — the JWT
+              shape (id, email, expires, etc.) is starter scaffolding. */}
           <pre
             className="text-sm text-gray-300 whitespace-pre-wrap overflow-x-auto bg-stone-800 p-4 rounded-md w-full"
             data-testid="session-json"

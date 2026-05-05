@@ -1,3 +1,11 @@
+/*
+ * Tailwind 4 globals for Christophers-Next-Template.
+ *
+ * The starter is intentionally dark-mode-only. There is no light-mode
+ * theme, no <html class="dark"> toggle, and no `prefers-color-scheme`
+ * fallback. Forks that want light mode should swap the @theme tokens
+ * here and remove the body color overrides below.
+ */
 @import 'tailwindcss';
 
 @theme {
@@ -24,16 +32,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p {
-  color: var(--color-white);
-}
-
-a {
-  transition: all 0.2s ease-in-out;
-}
-a:hover {
-  color: var(--color-blue-500);
-}
+/* Heading + link element-level defaults. We intentionally do NOT set
+ * `p { color }` or `a { transition: all }` — Tailwind utilities should
+ * win on these surfaces and `transition: all` is a known perf footgun. */
 
 h1,
 h2,

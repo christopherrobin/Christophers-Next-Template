@@ -73,6 +73,50 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
 
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      # Override workflow-level fakes with the service container URLs
+      DATABASE_PUBLIC_URL: postgresql://ci:ci@localhost:5432/ci
+      DATABASE_TEST_URL: postgresql://ci:ci@localhost:5432/ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn prisma generate
+      - run: yarn prisma migrate deploy
+      - name: Install Playwright browsers
+        run: yarn playwright install --with-deps chromium
+      - name: Run e2e tests
+        run: yarn test:e2e:ci
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+
   # PR-only: blocks merge if a new/upgraded dep introduces a known CVE
   # or ships under a non-allowlisted license. Standalone job (no
   # `needs:` graph), so it doesn't gate the build/test/lint matrix.

@@ -22,7 +22,8 @@
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:e2e": "dotenv -e .env.test -- playwright test"
+    "test:e2e": "dotenv -e .env.test -- playwright test",
+    "test:e2e:ci": "playwright test"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

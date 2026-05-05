@@ -1,5 +1,7 @@
 # Christophers-Next-Template
 
+[![CI](https://github.com/christopherrobin/Christophers-Next-Template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/christopherrobin/Christophers-Next-Template/actions/workflows/ci.yml)
+
 ![Howdy Preview](public/howdy.png)
 
 ## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
@@ -126,7 +128,6 @@ For more icons and usage details, see the [Heroicons documentation](https://hero
 This project supports two main testing methods:
 
 - **Unit & Component Testing** (Jest + Testing Library):
-
   - Run all tests: `yarn test`
   - Run a specific test file: `yarn test src/components/Button.test.tsx`
   - Tests are co-located next to the components they cover (e.g. `Button.tsx` + `Button.test.tsx`).

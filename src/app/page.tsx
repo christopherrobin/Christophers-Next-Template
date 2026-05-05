@@ -41,7 +41,7 @@ const features = [
   {
     icon: CommandLineIcon,
     title: 'Pre-commit hooks',
-    body: 'Husky + lint-staged keep junk out of the history.'
+    body: 'simple-git-hooks + lint-staged keep junk out of the history.'
   },
   {
     icon: CubeTransparentIcon,

@@ -23,23 +23,23 @@ test.describe('sign-in flow', () => {
     ).toBeVisible()
   })
 
-  test('wrong password shows Invalid password and stays on /sign-in', async ({
+  test('wrong password shows Invalid email or password and stays on /sign-in', async ({
     page
   }) => {
     await page.goto('/sign-in')
     await page.getByPlaceholder('Email').fill(TEST_EMAIL)
     await page.getByPlaceholder('Password').fill('WrongPassword!')
     await page.getByRole('button', { name: 'Sign In' }).click()
-    await expect(page.getByText('Invalid password')).toBeVisible()
+    await expect(page.getByText('Invalid email or password')).toBeVisible()
     await expect(page).toHaveURL(/\/sign-in$/)
   })
 
-  test('unknown user shows No user found', async ({ page }) => {
+  test('unknown user shows Invalid email or password', async ({ page }) => {
     await page.goto('/sign-in')
     await page.getByPlaceholder('Email').fill('ghost@nowhere.dev')
     await page.getByPlaceholder('Password').fill('Whatever123!')
     await page.getByRole('button', { name: 'Sign In' }).click()
-    await expect(page.getByText('No user found')).toBeVisible()
+    await expect(page.getByText('Invalid email or password')).toBeVisible()
     await expect(page).toHaveURL(/\/sign-in$/)
   })
 

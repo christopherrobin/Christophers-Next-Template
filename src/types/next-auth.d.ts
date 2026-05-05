@@ -16,3 +16,12 @@ declare module 'next-auth' {
     updatedAt?: string
   }
 }
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string
+    createdAt: string
+    emailVerified?: string | null
+    updatedAt?: string
+  }
+}

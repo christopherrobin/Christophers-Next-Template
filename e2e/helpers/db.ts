@@ -17,7 +17,7 @@ export async function seedUser({
   email,
   password
 }: SeedUserInput): Promise<User> {
-  const hashed = await hash(password, 10)
+  const hashed = await hash(password, 12)
   return prisma.user.upsert({
     where: { email },
     update: { password: hashed },

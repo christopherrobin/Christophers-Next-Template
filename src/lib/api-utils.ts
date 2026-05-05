@@ -35,5 +35,5 @@ export async function requireAuth(): Promise<AuthResult> {
   if (!session?.user || !('id' in session.user) || !session.user.id) {
     return { error: errorResponse('Unauthorized', 401) }
   }
-  return { session, userId: session.user.id as string }
+  return { session, userId: session.user.id }
 }

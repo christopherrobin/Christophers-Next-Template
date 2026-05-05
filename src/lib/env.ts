@@ -1,7 +1,6 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
   DATABASE_PUBLIC_URL: z.string().min(1, 'DATABASE_PUBLIC_URL is required'),
   NEXTAUTH_SECRET: z
     .string()

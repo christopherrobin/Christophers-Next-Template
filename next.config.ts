@@ -3,10 +3,6 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    DATABASE_PUBLIC_URL: process.env.DATABASE_PUBLIC_URL
-  },
   // Apply security headers
   headers: async () => [
     {
@@ -21,8 +17,8 @@ const nextConfig: NextConfig = {
           value: 'DENY'
         },
         {
-          key: 'X-XSS-Protection',
-          value: '1; mode=block'
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin'
         }
       ]
     }

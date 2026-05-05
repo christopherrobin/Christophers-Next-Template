@@ -56,7 +56,7 @@ describe('authOptions.providers[0].authorize', () => {
     const authorize = getAuthorize()
     await expect(
       authorize({ email: 'a@b.com', password: 'pw' })
-    ).rejects.toThrow('No user found')
+    ).rejects.toThrow('Invalid email or password')
   })
 
   it('throws when password does not match', async () => {
@@ -72,7 +72,7 @@ describe('authOptions.providers[0].authorize', () => {
     const authorize = getAuthorize()
     await expect(
       authorize({ email: 'a@b.com', password: 'pw' })
-    ).rejects.toThrow('Invalid password')
+    ).rejects.toThrow('Invalid email or password')
   })
 
   it('returns user payload with ISO date strings on success', async () => {

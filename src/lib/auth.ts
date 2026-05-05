@@ -24,10 +24,10 @@ export const authOptions: AuthOptions = {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email }
         })
-        if (!user) throw new Error('No user found')
+        if (!user) throw new Error('Invalid email or password')
         // Compare hashed password
         const valid = await compare(credentials.password, user.password)
-        if (!valid) throw new Error('Invalid password')
+        if (!valid) throw new Error('Invalid email or password')
 
         // Return user with necessary fields, converting Date objects to ISO strings
         return {
@@ -49,7 +49,10 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.emailVerified = user.emailVerified
+        // `authorize()` always returns these as ISO strings; NextAuth's
+        // base `User` interface widens `emailVerified` to `Date | null`
+        // via declaration merging, so narrow it back here.
+        token.emailVerified = user.emailVerified as string | null | undefined
         token.updatedAt = user.updatedAt
         token.createdAt = user.createdAt
       }
@@ -59,9 +62,9 @@ export const authOptions: AuthOptions = {
       if (token && session.user) {
         if (!token.sub) throw new Error('No user found')
         session.user.id = token.sub
-        session.user.emailVerified = token.emailVerified as string | null
-        session.user.updatedAt = token.updatedAt as string
-        session.user.createdAt = token.createdAt as string
+        session.user.emailVerified = token.emailVerified
+        session.user.updatedAt = token.updatedAt
+        session.user.createdAt = token.createdAt
       }
       return session
     }

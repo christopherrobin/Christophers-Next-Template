@@ -6,8 +6,13 @@ import { prisma } from '@/lib/prisma'
 import { signUpSchema } from '@/lib/schemas'
 
 export async function POST(req: NextRequest) {
+  let body: unknown
   try {
-    const body = await req.json()
+    body = await req.json()
+  } catch {
+    return errorResponse('Invalid JSON body', 400)
+  }
+  try {
     const result = signUpSchema.safeParse(body)
     if (!result.success) {
       return validationError(result.error.flatten().fieldErrors)
@@ -18,7 +23,7 @@ export async function POST(req: NextRequest) {
     if (existing) {
       return errorResponse('User already exists')
     }
-    const hashed = await hash(password, 10)
+    const hashed = await hash(password, 12)
     await prisma.user.create({ data: { email, password: hashed } })
     return NextResponse.json({ ok: true })
   } catch (e) {

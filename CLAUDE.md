@@ -90,7 +90,7 @@ Sign-in and sign-up use **react-hook-form + `zodResolver`**. Schemas live in `sr
 
 Copy `.env.local.example` → `.env.local`:
 
-- `DATABASE_PUBLIC_URL`, `DATABASE_URL` — PostgreSQL connection strings
+- `DATABASE_PUBLIC_URL` — PostgreSQL connection string (read by Prisma)
 - `NEXTAUTH_SECRET` — generate with `openssl rand -base64 32` (min 32 chars)
 - `NEXTAUTH_URL` — e.g. `http://localhost:3000`
 

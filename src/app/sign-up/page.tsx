@@ -2,8 +2,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { signIn, useSession } from 'next-auth/react'
-import React, { useEffect, useState } from 'react'
+import { signIn } from 'next-auth/react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
@@ -11,7 +11,6 @@ import { Input } from '@/components/Input'
 import { signUpSchema, type SignUpInput } from '@/lib/schemas'
 
 export default function SignUp() {
-  const { status } = useSession()
   const router = useRouter()
   const [serverError, setServerError] = useState('')
   const {
@@ -21,12 +20,6 @@ export default function SignUp() {
   } = useForm<SignUpInput>({
     resolver: zodResolver(signUpSchema)
   })
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.replace('/dashboard')
-    }
-  }, [status, router])
 
   const onSubmit = async ({ email, password }: SignUpInput) => {
     setServerError('')

@@ -69,11 +69,12 @@ test.describe('POST /api/sign-up', () => {
     expect(await res.json()).toEqual({ error: 'User already exists' })
   })
 
-  test('returns 500 when the body is not valid JSON', async ({ request }) => {
+  test('returns 400 when the body is not valid JSON', async ({ request }) => {
     const res = await request.post('/api/sign-up', {
       data: Buffer.from('not-json'),
       headers: { 'content-type': 'application/json' }
     })
-    expect(res.status()).toBe(500)
+    expect(res.status()).toBe(400)
+    expect(await res.json()).toEqual({ error: 'Invalid JSON body' })
   })
 })

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useRouter } from 'next/navigation'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import React from 'react'
 
 import SignUp from './page'
@@ -11,12 +11,10 @@ jest.mock('next/navigation', () => ({
 }))
 
 jest.mock('next-auth/react', () => ({
-  useSession: jest.fn(),
   signIn: jest.fn()
 }))
 
 const mockedUseRouter = useRouter as jest.Mock
-const mockedUseSession = useSession as jest.Mock
 const mockedSignIn = signIn as jest.Mock
 
 const mockFetchOk = (body: unknown) => {
@@ -46,16 +44,6 @@ describe('SignUp page', () => {
 
   beforeEach(() => {
     mockedUseRouter.mockReturnValue({ push, replace, refresh })
-    mockedUseSession.mockReturnValue({ status: 'unauthenticated', data: null })
-  })
-
-  it('redirects to /dashboard when authenticated', () => {
-    mockedUseSession.mockReturnValue({
-      status: 'authenticated',
-      data: { user: { email: 'a@b.com' } }
-    })
-    render(<SignUp />)
-    expect(replace).toHaveBeenCalledWith('/dashboard')
   })
 
   it('renders the form fields, submit button, and link to /sign-in', () => {

@@ -92,7 +92,7 @@ describe('POST /api/sign-up', () => {
     const res = await POST(
       buildRequest({ email: 'a@b.com', password: VALID_PASSWORD })
     )
-    expect(mockedHash).toHaveBeenCalledWith(VALID_PASSWORD, 10)
+    expect(mockedHash).toHaveBeenCalledWith(VALID_PASSWORD, 12)
     expect(mockedCreate).toHaveBeenCalledWith({
       data: { email: 'a@b.com', password: 'hashed-pw' }
     })
@@ -116,19 +116,16 @@ describe('POST /api/sign-up', () => {
     errorSpy.mockRestore()
   })
 
-  it('returns 500 when the body is malformed', async () => {
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  it('returns 400 when the body is malformed JSON', async () => {
     const malformed = new Request('http://localhost/api/sign-up', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: 'not json'
     }) as unknown as Parameters<typeof POST>[0]
     const res = await POST(malformed)
-    expect(res.status).toBe(500)
+    expect(res.status).toBe(400)
     await expect(res.json()).resolves.toEqual({
-      error: 'Internal server error'
+      error: 'Invalid JSON body'
     })
-    expect(errorSpy).toHaveBeenCalled()
-    errorSpy.mockRestore()
   })
 })

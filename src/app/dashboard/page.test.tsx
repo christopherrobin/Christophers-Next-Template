@@ -1,51 +1,49 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { signOut, useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth/next'
 import React from 'react'
 
 import Dashboard from './page'
 
-jest.mock('next-auth/react', () => ({
-  useSession: jest.fn(),
-  signOut: jest.fn()
+jest.mock('next-auth/next', () => ({
+  getServerSession: jest.fn()
 }))
 
-const mockedUseSession = useSession as jest.Mock
-const mockedSignOut = signOut as jest.Mock
-
-describe('Dashboard page', () => {
-  it('renders the spinner while loading', () => {
-    mockedUseSession.mockReturnValue({ data: null, status: 'loading' })
-    render(<Dashboard />)
-    expect(screen.getByRole('status')).toBeInTheDocument()
-    expect(screen.getByLabelText('Loading')).toBeInTheDocument()
+jest.mock('next/navigation', () => ({
+  redirect: jest.fn(() => {
+    throw new Error('NEXT_REDIRECT')
   })
+}))
 
-  it('greets the authenticated user and renders the session JSON', () => {
-    const session = { user: { email: 'a@b.com' }, expires: 'never' }
-    mockedUseSession.mockReturnValue({ data: session, status: 'authenticated' })
-    render(<Dashboard />)
+// SignOutButton is a client island that uses next-auth/react. Stub it to
+// keep this test focused on the server component's rendered output.
+jest.mock('./SignOutButton', () => ({
+  SignOutButton: () => <button type="button">Sign out</button>
+}))
+
+const mockedGetServerSession = getServerSession as jest.Mock
+const mockedRedirect = redirect as unknown as jest.Mock
+
+describe('Dashboard page (server component)', () => {
+  it('greets the authenticated user and renders the session JSON', async () => {
+    const session = {
+      user: { id: 'u1', email: 'a@b.com', createdAt: '2024-01-01' },
+      expires: 'never'
+    }
+    mockedGetServerSession.mockResolvedValue(session)
+
+    const ui = await Dashboard()
+    render(ui)
+
     expect(screen.getByText('Welcome, a@b.com')).toBeInTheDocument()
     expect(screen.getByText(/"a@b\.com"/)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Sign out' })).toBeInTheDocument()
   })
 
-  it('calls signOut when Sign out is clicked', async () => {
-    mockedUseSession.mockReturnValue({
-      data: { user: { email: 'a@b.com' }, expires: 'never' },
-      status: 'authenticated'
-    })
-    const user = userEvent.setup()
-    render(<Dashboard />)
-    await user.click(screen.getByRole('button', { name: 'Sign out' }))
-    expect(mockedSignOut).toHaveBeenCalledTimes(1)
-  })
+  it('redirects to /sign-in when no session is present', async () => {
+    mockedGetServerSession.mockResolvedValue(null)
 
-  it('does not crash when session.user is missing', () => {
-    mockedUseSession.mockReturnValue({
-      data: { expires: 'never' },
-      status: 'authenticated'
-    })
-    expect(() => render(<Dashboard />)).not.toThrow()
-    expect(screen.getByText(/Welcome,/)).toBeInTheDocument()
+    await expect(Dashboard()).rejects.toThrow('NEXT_REDIRECT')
+    expect(mockedRedirect).toHaveBeenCalledWith('/sign-in')
   })
 })

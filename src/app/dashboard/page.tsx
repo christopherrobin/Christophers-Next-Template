@@ -1,20 +1,18 @@
-'use client'
-import { signOut, useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth/next'
 
-import { Button } from '@/components/Button'
-import Spinner from '@/components/Spinner'
+import { SignOutButton } from './SignOutButton'
 
-export default function Dashboard() {
-  const { data: session, status } = useSession()
-  const { email } = session?.user || {}
+import { authOptions } from '@/lib/auth'
 
-  if (status === 'loading') {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Spinner />
-      </div>
-    )
+export default async function Dashboard() {
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    redirect('/sign-in')
   }
+
+  const { email } = session.user
 
   return (
     <div className="px-4 py-6 fadeIn">
@@ -30,7 +28,7 @@ export default function Dashboard() {
           >
             <code>{JSON.stringify(session, null, 2)}</code>
           </pre>
-          <Button onClick={() => signOut()}>Sign out</Button>
+          <SignOutButton />
         </div>
       </main>
     </div>

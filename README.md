@@ -35,6 +35,25 @@
 - User registration and login flows
 - Protected dashboard for authenticated users
 
+## Resolutions (yarn `resolutions` block)
+
+<!-- last audited: 2026-05-05 — kept in sync with sibling MUI template -->
+
+The `package.json` `resolutions` block forces patched versions of transitive dependencies that direct dependencies haven't yet pulled. Each pin is justified by a real audit finding; audit periodically and remove pins as direct deps catch up.
+
+| Pin                 | Why                                                                                                                 | Remove when                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `diff >=4.0.4`      | [GHSA-73rr-hh4g-fpgx](https://github.com/advisories/GHSA-73rr-hh4g-fpgx) via `ts-node>diff`                         | ts-node 11+ ships newer diff                        |
+| `flatted >=3.4.2`   | [GHSA-rf6f-7fwh-wjgh](https://github.com/advisories/GHSA-rf6f-7fwh-wjgh) via ESLint flat config                     | ESLint major bump pulls newer flatted               |
+| `js-yaml >=3.14.2`  | [GHSA-mh29-5h37-fv8m](https://github.com/advisories/GHSA-mh29-5h37-fv8m) via `@istanbuljs/load-nyc-config`          | Coverage tooling drops js-yaml@3                    |
+| `minimatch >=3.1.3` | [GHSA-7r86-cg39-jmmj](https://github.com/advisories/GHSA-7r86-cg39-jmmj)                                            | Direct deps drop transitives on old minimatch       |
+| `picomatch >=4.0.4` | [GHSA-3v7f-55p6-f55p](https://github.com/advisories/GHSA-3v7f-55p6-f55p) via Jest's anymatch                        | Jest 31+ moves to picomatch 4+                      |
+| `postcss >=8.5.10`  | [GHSA-qx2v-qp2m-jg93](https://github.com/advisories/GHSA-qx2v-qp2m-jg93) via Next.js                                | Next 17+ pulls newer postcss                        |
+| `preact >=10.26.10` | [GHSA-36hm-qxxp-pg3m](https://github.com/advisories/GHSA-36hm-qxxp-pg3m) via preact-render-to-string                | preact-render-to-string drops old preact constraint |
+| `yaml >=1.10.3`     | [GHSA-48c2-rrv3-qjmp](https://github.com/advisories/GHSA-48c2-rrv3-qjmp) — MUI sibling origin; kept here for parity | Direct deps drop transitives on yaml@1              |
+
+**Intentionally not pinned:** `uuid <14.0.0` ([GHSA-w5hq-g745-h8pq](https://github.com/advisories/GHSA-w5hq-g745-h8pq)). uuid 14 is ESM-only and breaks Jest's transform of next-auth's pinned `uuid@8.3.2`. The pin itself has no live advisory. Revisit when next-auth ships uuid 14 support, or when Jest's ESM handling matures.
+
 ## Getting Started
 
 Clone and set up the project in minutes:

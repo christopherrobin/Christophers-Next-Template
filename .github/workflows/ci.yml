@@ -74,6 +74,8 @@ jobs:
       - run: yarn build
 
   # PR-only: blocks merge if a new/upgraded dep introduces a known CVE
+  # or ships under a non-allowlisted license. Standalone job (no
+  # `needs:` graph), so it doesn't gate the build/test/lint matrix.
   dependency-review:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
@@ -83,3 +85,10 @@ jobs:
       - uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: moderate
+          # Only fail on runtime (production) deps. devDep CVEs warn
+          # but don't block — a public starter ships no end-user code,
+          # so devDep tooling churn shouldn't block routine merges.
+          fail-on-scopes: runtime
+          comment-summary-in-pr: on-failure
+          license-check: true
+          allow-licenses: MIT, ISC, Apache-2.0, BSD-2-Clause, BSD-3-Clause, 0BSD, CC0-1.0, Unlicense, BlueOak-1.0.0, MPL-2.0

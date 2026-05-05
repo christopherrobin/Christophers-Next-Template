@@ -109,9 +109,9 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-base sm:text-lg text-white/70 max-w-2xl">
-            An opinionated Next.js 16 starter with auth, Prisma, end-to-end type
-            safety, and a full test pyramid. Fork it, set three env vars, and
-            ship.
+            An opinionated Next.js 16 starter with Tailwind 4, NextAuth, Prisma
+            + Postgres, and a full test pyramid. Fork it, set three env vars,
+            and ship.
           </p>
           <div className="flex items-center gap-3 text-sm text-white/60">
             <GitHubIcon className="w-5 h-5 text-white" />
@@ -152,8 +152,8 @@ export default function Home() {
               Built on the <span className="text-blue-500">latest</span>.
             </h2>
             <p className="text-white/60 max-w-2xl">
-              Every dependency is on its current major. Audited weekly,
-              security-pinned, type-safe end to end.
+              Every dependency on its current major. Type-safe end to end,
+              security-pinned, audited at every PR.
             </p>
           </div>
 

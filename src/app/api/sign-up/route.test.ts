@@ -24,16 +24,16 @@ const mockedFindUnique = prisma.user.findUnique as jest.Mock
 const mockedCreate = prisma.user.create as jest.Mock
 const mockedHash = hash as jest.Mock
 
-const VALID_PASSWORD = 'CorrectHorse42!'
+const VALID_PASSWORD = 'ChrisIsTheBest42!'
 
 const buildRequest = (body: unknown) =>
-  new Request('http://localhost/api/join', {
+  new Request('http://localhost/api/sign-up', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   }) as unknown as Parameters<typeof POST>[0]
 
-describe('POST /api/join', () => {
+describe('POST /api/sign-up', () => {
   it('returns 400 with field details when email is missing', async () => {
     const res = await POST(buildRequest({ password: VALID_PASSWORD }))
     expect(res.status).toBe(400)
@@ -118,7 +118,7 @@ describe('POST /api/join', () => {
 
   it('returns 500 when the body is malformed', async () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
-    const malformed = new Request('http://localhost/api/join', {
+    const malformed = new Request('http://localhost/api/sign-up', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: 'not json'

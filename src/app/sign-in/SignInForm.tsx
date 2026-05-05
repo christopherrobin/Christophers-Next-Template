@@ -111,8 +111,8 @@ function SignInForm() {
       <div className="mt-4 text-center">
         <p className="text-gray-700 mt-3">
           Don&apos;t have an account?{' '}
-          <a href="/join" className="text-blue-500 hover:underline">
-            Join now
+          <a href="/sign-up" className="text-blue-500 hover:underline">
+            Sign up
           </a>
         </p>
       </div>

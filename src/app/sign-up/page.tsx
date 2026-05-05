@@ -8,9 +8,9 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { joinSchema, type JoinInput } from '@/lib/schemas'
+import { signUpSchema, type SignUpInput } from '@/lib/schemas'
 
-export default function Join() {
+export default function SignUp() {
   const { status } = useSession()
   const router = useRouter()
   const [serverError, setServerError] = useState('')
@@ -18,8 +18,8 @@ export default function Join() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<JoinInput>({
-    resolver: zodResolver(joinSchema)
+  } = useForm<SignUpInput>({
+    resolver: zodResolver(signUpSchema)
   })
 
   useEffect(() => {
@@ -28,11 +28,11 @@ export default function Join() {
     }
   }, [status, router])
 
-  const onSubmit = async ({ email, password }: JoinInput) => {
+  const onSubmit = async ({ email, password }: SignUpInput) => {
     setServerError('')
 
     try {
-      const res = await fetch('/api/join', {
+      const res = await fetch('/api/sign-up', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -58,7 +58,7 @@ export default function Join() {
         setServerError(data.error || 'Failed to create account')
       }
     } catch (err) {
-      console.error('Join error:', err)
+      console.error('Sign-up error:', err)
       setServerError('An unexpected error occurred')
     }
   }
@@ -66,7 +66,7 @@ export default function Join() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 fadeIn">
       <h1 className="text-2xl md:text-5xl font-bold text-blue-500 mb-8">
-        Join the Club
+        Sign Up
       </h1>
       <form
         className="flex flex-col gap-4 w-full max-w-sm"
@@ -79,13 +79,13 @@ export default function Join() {
             placeholder="Email"
             autoComplete="email"
             aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? 'join-email-error' : undefined}
+            aria-describedby={errors.email ? 'sign-up-email-error' : undefined}
             {...register('email')}
           />
           {errors.email && (
             <p
-              id="join-email-error"
-              data-testid="join-email-error"
+              id="sign-up-email-error"
+              data-testid="sign-up-email-error"
               className="text-red-500 text-sm"
             >
               {errors.email.message}
@@ -99,14 +99,14 @@ export default function Join() {
             autoComplete="new-password"
             aria-invalid={!!errors.password}
             aria-describedby={
-              errors.password ? 'join-password-error' : undefined
+              errors.password ? 'sign-up-password-error' : undefined
             }
             {...register('password')}
           />
           {errors.password && (
             <p
-              id="join-password-error"
-              data-testid="join-password-error"
+              id="sign-up-password-error"
+              data-testid="sign-up-password-error"
               className="text-red-500 text-sm"
             >
               {errors.password.message}
@@ -114,10 +114,10 @@ export default function Join() {
           )}
         </div>
         <Button type="submit" loading={isSubmitting}>
-          {isSubmitting ? 'Joining...' : 'Join'}
+          {isSubmitting ? 'Signing Up...' : 'Sign Up'}
         </Button>
         {serverError && (
-          <div className="text-red-500" data-testid="join-error">
+          <div className="text-red-500" data-testid="sign-up-error">
             {serverError}
           </div>
         )}

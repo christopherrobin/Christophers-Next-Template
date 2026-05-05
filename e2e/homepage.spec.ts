@@ -9,9 +9,9 @@ test.describe('homepage', () => {
     await expect(page).toHaveTitle('Christophers-Next-Template')
   })
 
-  test('Join button links to /join', async ({ page }) => {
-    const joinLink = page.getByRole('link', { name: 'Join' })
-    await expect(joinLink).toHaveAttribute('href', '/join')
+  test('Sign Up button links to /sign-up', async ({ page }) => {
+    const signUpLink = page.getByRole('link', { name: 'Sign Up' })
+    await expect(signUpLink).toHaveAttribute('href', '/sign-up')
   })
 
   test('Sign In button links to /sign-in', async ({ page }) => {

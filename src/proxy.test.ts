@@ -33,9 +33,9 @@ describe('proxy', () => {
     expect(res.headers.get('location')).toBe('http://localhost:3000/dashboard')
   })
 
-  it('redirects authed users away from /join to /dashboard', async () => {
+  it('redirects authed users away from /sign-up to /dashboard', async () => {
     mockedGetToken.mockResolvedValueOnce({ sub: 'user-1' })
-    const res = await proxy(buildRequest('/join'))
+    const res = await proxy(buildRequest('/sign-up'))
     expect(res.status).toBe(307)
     expect(res.headers.get('location')).toBe('http://localhost:3000/dashboard')
   })
@@ -75,9 +75,9 @@ describe('proxy', () => {
     expect(res.headers.get('location')).toBeNull()
   })
 
-  it('lets anon users through to /join', async () => {
+  it('lets anon users through to /sign-up', async () => {
     mockedGetToken.mockResolvedValueOnce(null)
-    const res = await proxy(buildRequest('/join'))
+    const res = await proxy(buildRequest('/sign-up'))
     expect(res.status).toBe(200)
     expect(res.headers.get('location')).toBeNull()
   })

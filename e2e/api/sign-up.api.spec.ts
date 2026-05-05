@@ -4,7 +4,7 @@ import { getUserByEmail, seedUser } from '../helpers/db'
 
 const DUPLICATE_EMAIL = 'dup-api@test.dev'
 
-test.describe('POST /api/join', () => {
+test.describe('POST /api/sign-up', () => {
   test.beforeAll(async () => {
     await seedUser({ email: DUPLICATE_EMAIL, password: 'AlreadyHere42!' })
   })
@@ -13,7 +13,7 @@ test.describe('POST /api/join', () => {
     request
   }, testInfo) => {
     const email = `api-${testInfo.workerIndex}-${Date.now()}@test.dev`
-    const res = await request.post('/api/join', {
+    const res = await request.post('/api/sign-up', {
       data: { email, password: 'Strong42!' }
     })
     expect(res.status()).toBe(200)
@@ -26,7 +26,7 @@ test.describe('POST /api/join', () => {
   test('returns 400 with field details when email is missing', async ({
     request
   }) => {
-    const res = await request.post('/api/join', {
+    const res = await request.post('/api/sign-up', {
       data: { password: 'Strong42!' }
     })
     expect(res.status()).toBe(400)
@@ -38,7 +38,7 @@ test.describe('POST /api/join', () => {
   test('returns 400 with field details when password is missing', async ({
     request
   }) => {
-    const res = await request.post('/api/join', {
+    const res = await request.post('/api/sign-up', {
       data: { email: 'pwless@test.dev' }
     })
     expect(res.status()).toBe(400)
@@ -50,7 +50,7 @@ test.describe('POST /api/join', () => {
   test('returns 400 with field details when password is too short', async ({
     request
   }) => {
-    const res = await request.post('/api/join', {
+    const res = await request.post('/api/sign-up', {
       data: { email: 'short@test.dev', password: 'pw' }
     })
     expect(res.status()).toBe(400)
@@ -62,7 +62,7 @@ test.describe('POST /api/join', () => {
   })
 
   test('returns 400 for a duplicate email', async ({ request }) => {
-    const res = await request.post('/api/join', {
+    const res = await request.post('/api/sign-up', {
       data: { email: DUPLICATE_EMAIL, password: 'WhatEver42!' }
     })
     expect(res.status()).toBe(400)
@@ -70,7 +70,7 @@ test.describe('POST /api/join', () => {
   })
 
   test('returns 500 when the body is not valid JSON', async ({ request }) => {
-    const res = await request.post('/api/join', {
+    const res = await request.post('/api/sign-up', {
       data: Buffer.from('not-json'),
       headers: { 'content-type': 'application/json' }
     })

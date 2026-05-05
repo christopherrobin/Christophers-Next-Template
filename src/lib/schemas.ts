@@ -10,7 +10,7 @@ export const signInSchema = z.object({
 
 export type SignInInput = z.infer<typeof signInSchema>
 
-export const joinSchema = z.object({
+export const signUpSchema = z.object({
   email: z
     .string()
     .min(1, 'Email is required')
@@ -18,4 +18,4 @@ export const joinSchema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters')
 })
 
-export type JoinInput = z.infer<typeof joinSchema>
+export type SignUpInput = z.infer<typeof signUpSchema>

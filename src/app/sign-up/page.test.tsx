@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
 import React from 'react'
 
-import Join from './page'
+import SignUp from './page'
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn()
@@ -39,7 +39,7 @@ const mockFetchThrow = () => {
     .mockRejectedValueOnce(new Error('network')) as unknown as typeof fetch
 }
 
-describe('Join page', () => {
+describe('SignUp page', () => {
   const push = jest.fn()
   const refresh = jest.fn()
   const replace = jest.fn()
@@ -54,15 +54,15 @@ describe('Join page', () => {
       status: 'authenticated',
       data: { user: { email: 'a@b.com' } }
     })
-    render(<Join />)
+    render(<SignUp />)
     expect(replace).toHaveBeenCalledWith('/dashboard')
   })
 
   it('renders the form fields, submit button, and link to /sign-in', () => {
-    render(<Join />)
+    render(<SignUp />)
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Join' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Sign In' })).toHaveAttribute(
       'href',
       '/sign-in'
@@ -73,21 +73,27 @@ describe('Join page', () => {
     mockFetchOk({ ok: true })
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
-    render(<Join />)
+    render(<SignUp />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
-    await user.click(screen.getByRole('button', { name: 'Join' }))
+    await user.type(
+      screen.getByPlaceholderText('Password'),
+      'ChrisIsTheBest42!'
+    )
+    await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith('/api/join', {
+      expect(global.fetch).toHaveBeenCalledWith('/api/sign-up', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: 'a@b.com', password: 'CorrectHorse42!' })
+        body: JSON.stringify({
+          email: 'a@b.com',
+          password: 'ChrisIsTheBest42!'
+        })
       })
     })
     await waitFor(() => {
       expect(mockedSignIn).toHaveBeenCalledWith('credentials', {
         email: 'a@b.com',
-        password: 'CorrectHorse42!',
+        password: 'ChrisIsTheBest42!',
         redirect: false,
         callbackUrl: '/dashboard'
       })
@@ -98,25 +104,31 @@ describe('Join page', () => {
     expect(refresh).toHaveBeenCalled()
   })
 
-  it('shows the API error and skips signIn when /api/join fails', async () => {
+  it('shows the API error and skips signIn when /api/sign-up fails', async () => {
     mockFetchError({ error: 'User already exists' })
     const user = userEvent.setup()
-    render(<Join />)
+    render(<SignUp />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
-    await user.click(screen.getByRole('button', { name: 'Join' }))
+    await user.type(
+      screen.getByPlaceholderText('Password'),
+      'ChrisIsTheBest42!'
+    )
+    await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     expect(await screen.findByText('User already exists')).toBeInTheDocument()
     expect(mockedSignIn).not.toHaveBeenCalled()
   })
 
-  it('shows the signIn error when signIn fails after a successful join', async () => {
+  it('shows the signIn error when signIn fails after a successful sign-up', async () => {
     mockFetchOk({ ok: true })
     mockedSignIn.mockResolvedValueOnce({ error: 'Invalid password' })
     const user = userEvent.setup()
-    render(<Join />)
+    render(<SignUp />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
-    await user.click(screen.getByRole('button', { name: 'Join' }))
+    await user.type(
+      screen.getByPlaceholderText('Password'),
+      'ChrisIsTheBest42!'
+    )
+    await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     expect(await screen.findByText('Invalid password')).toBeInTheDocument()
   })
 
@@ -124,10 +136,13 @@ describe('Join page', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
     mockFetchThrow()
     const user = userEvent.setup()
-    render(<Join />)
+    render(<SignUp />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
-    await user.click(screen.getByRole('button', { name: 'Join' }))
+    await user.type(
+      screen.getByPlaceholderText('Password'),
+      'ChrisIsTheBest42!'
+    )
+    await user.click(screen.getByRole('button', { name: 'Sign Up' }))
     expect(
       await screen.findByText('An unexpected error occurred')
     ).toBeInTheDocument()
@@ -148,16 +163,19 @@ describe('Join page', () => {
     ) as unknown as typeof fetch
     mockedSignIn.mockResolvedValueOnce({ url: '/dashboard' })
     const user = userEvent.setup()
-    render(<Join />)
+    render(<SignUp />)
     await user.type(screen.getByPlaceholderText('Email'), 'a@b.com')
-    await user.type(screen.getByPlaceholderText('Password'), 'CorrectHorse42!')
-    const submit = screen.getByRole('button', { name: 'Join' })
+    await user.type(
+      screen.getByPlaceholderText('Password'),
+      'ChrisIsTheBest42!'
+    )
+    const submit = screen.getByRole('button', { name: 'Sign Up' })
     await user.click(submit)
     await waitFor(() => {
       expect(submit).toBeDisabled()
     })
     expect(
-      screen.queryByRole('button', { name: 'Join' })
+      screen.queryByRole('button', { name: 'Sign Up' })
     ).not.toBeInTheDocument()
     resolveFetch({ ok: true, json: () => Promise.resolve({ ok: true }) })
     await waitFor(() => {

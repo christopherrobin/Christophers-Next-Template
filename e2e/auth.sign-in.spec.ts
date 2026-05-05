@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 import { seedUser } from './helpers/db'
 
 const TEST_EMAIL = 'signin@test.dev'
-const TEST_PASSWORD = 'CorrectHorse42!'
+const TEST_PASSWORD = 'ChrisIsTheBest42!'
 
 test.describe('sign-in flow', () => {
   test.beforeAll(async () => {
@@ -64,12 +64,10 @@ test.describe('sign-in flow', () => {
     expect(calledNextAuth).toBe(false)
   })
 
-  test('Join now link navigates to /join', async ({ page }) => {
+  test('Sign up link navigates to /sign-up', async ({ page }) => {
     await page.goto('/sign-in')
-    await page.getByRole('link', { name: 'Join now' }).click()
-    await page.waitForURL('**/join')
-    await expect(
-      page.getByRole('heading', { name: 'Join the Club' })
-    ).toBeVisible()
+    await page.getByRole('link', { name: 'Sign up' }).click()
+    await page.waitForURL('**/sign-up')
+    await expect(page.getByRole('heading', { name: 'Sign Up' })).toBeVisible()
   })
 })

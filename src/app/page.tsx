@@ -29,11 +29,11 @@ export default function Home() {
           project.
         </p>
         <Button
-          href="/join"
+          href="/sign-up"
           className="self-center mt-2 my-2 w-full"
           endIcon={<RocketLaunchIcon className="w-5 h-5" />}
         >
-          Join
+          Sign Up
         </Button>
         <Button
           href="/sign-in"

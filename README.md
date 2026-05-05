@@ -59,7 +59,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
 ## Project Structure
 
-- `src/app/` — Next.js App Router pages (home, join, sign-in, dashboard, `not-found.tsx`)
+- `src/app/` — Next.js App Router pages (home, sign-up, sign-in, dashboard, `not-found.tsx`)
 - `src/components/` — Reusable UI components (Button, Input, Spinner, GitHubIcon, Providers)
 - `src/lib/` — Prisma client and NextAuth configuration
 - `src/middleware.ts` — Route protection and auth redirects
@@ -100,7 +100,7 @@ Extend or modify any part to fit your project:
 The included `src/middleware.ts` enforces:
 
 - `/dashboard/*` requires authentication (unauth users are redirected to `/sign-in?callbackUrl=...`)
-- `/sign-in` and `/join` redirect authenticated users to `/dashboard`
+- `/sign-in` and `/sign-up` redirect authenticated users to `/dashboard`
 - `/` is public for everyone
 
 ## Using Heroicons

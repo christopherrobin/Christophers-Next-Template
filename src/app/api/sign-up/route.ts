@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { errorResponse, validationError } from '@/lib/api-utils'
 import { prisma } from '@/lib/prisma'
-import { joinSchema } from '@/lib/schemas'
+import { signUpSchema } from '@/lib/schemas'
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const result = joinSchema.safeParse(body)
+    const result = signUpSchema.safeParse(body)
     if (!result.success) {
       return validationError(result.error.flatten().fieldErrors)
     }

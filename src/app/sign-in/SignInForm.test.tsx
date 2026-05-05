@@ -28,13 +28,13 @@ describe('SignInForm', () => {
     mockedUseSearchParams.mockReturnValue(new URLSearchParams(''))
   })
 
-  it('renders email, password, submit, and a link to /join', () => {
+  it('renders email, password, submit, and a link to /sign-up', () => {
     render(<SignInForm />)
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument()
-    const joinLink = screen.getByRole('link', { name: /join now/i })
-    expect(joinLink).toHaveAttribute('href', '/join')
+    const signUpLink = screen.getByRole('link', { name: /sign up/i })
+    expect(signUpLink).toHaveAttribute('href', '/sign-up')
   })
 
   it('submits the form with credentials', async () => {

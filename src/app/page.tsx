@@ -84,20 +84,12 @@ const stack = [
     blurb: '@theme {} config in CSS, zero JS config file.'
   },
   {
-    name: 'Prisma',
+    name: 'Prisma + Postgres',
     version: '6',
     badge:
       'https://img.shields.io/badge/Prisma-6-2D3748?style=for-the-badge&logo=prisma&logoColor=white',
     url: 'https://www.prisma.io/',
-    blurb: 'Type-safe ORM, schema migrations, singleton client.'
-  },
-  {
-    name: 'PostgreSQL',
-    version: '',
-    badge:
-      'https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white',
-    url: 'https://www.postgresql.org/',
-    blurb: 'Battle-tested, ACID, scales to billions of rows.'
+    blurb: 'Type-safe ORM, schema migrations, ACID Postgres backend.'
   },
   {
     name: 'NextAuth.js',
@@ -114,7 +106,7 @@ export default function Home() {
     <div className="min-h-screen px-6 py-12 sm:py-16 fadeIn">
       <div className="mx-auto w-full max-w-5xl flex flex-col gap-20">
         {/* Hero */}
-        <section className="flex flex-col items-start gap-6 pt-8 sm:pt-16">
+        <section className="flex flex-col items-start gap-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
             <SparklesIcon className="w-3.5 h-3.5 text-blue-400" />
             <span>v1 - Next.js 16 starter</span>

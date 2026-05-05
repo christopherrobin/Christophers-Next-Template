@@ -8,23 +8,7 @@ import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { postCredentialsSignIn } from '@/lib/auth-helpers'
 import { signInSchema, type SignInInput } from '@/lib/schemas'
-
-// Strict relative-path validator for the post-signin callbackUrl param.
-// Rejects:
-//   - missing / non-string
-//   - protocol-relative (//evil.com)
-//   - backslash-prefixed (some browsers normalize \ to /)
-//   - any backslash, CRLF, or colon (header-splitting / scheme injection)
-//   - non-leading-slash values
-function isSafeRelativePath(value: string | null): value is string {
-  if (!value) return false
-  if (!value.startsWith('/')) return false
-  if (value.startsWith('//')) return false
-  if (value.startsWith('/\\')) return false
-  if (/[\\\r\n]/.test(value)) return false
-  if (value.includes(':')) return false
-  return true
-}
+import { isSafeRelativePath } from '@/lib/url-utils'
 
 function SignInForm() {
   const router = useRouter()

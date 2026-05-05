@@ -94,9 +94,9 @@ function SignInForm() {
         </div>
       )}
       <div className="mt-4 text-center">
-        <p className="text-gray-700 mt-3">
+        <p className="text-white/70 mt-3">
           Don&apos;t have an account?{' '}
-          <a href="/sign-up" className="text-blue-500 hover:underline">
+          <a href="/sign-up" className="text-blue-400 underline">
             Sign up
           </a>
         </p>

@@ -9,7 +9,7 @@ A public Next.js 16 starter template with TypeScript, Tailwind CSS 4, Prisma + P
 - Next.js 16 (App Router, Turbopack default)
 - React 19, TypeScript 6 (strict)
 - Tailwind CSS 4 + `@heroicons/react`
-- Prisma 6 + PostgreSQL
+- Prisma 7 + PostgreSQL
 - NextAuth.js 4 (Credentials provider, bcryptjs)
 - Zod 4 + react-hook-form 7 (form validation, shared client/server schemas)
 - Jest 30 + React Testing Library

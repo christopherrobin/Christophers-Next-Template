@@ -85,11 +85,11 @@ const stack = [
   },
   {
     name: 'Prisma + Postgres',
-    version: '6',
+    version: '7',
     badge:
-      'https://img.shields.io/badge/Prisma-6-2D3748?style=for-the-badge&logo=prisma&logoColor=white',
+      'https://img.shields.io/badge/Prisma-7-2D3748?style=for-the-badge&logo=prisma&logoColor=white',
     url: 'https://www.prisma.io/',
-    blurb: 'Type-safe ORM, schema migrations, ACID Postgres backend.'
+    blurb: 'Type-safe ORM, driver-adapter, schema migrations.'
   }
 ]
 

@@ -15,8 +15,16 @@ updates:
           - 'minor'
           - 'patch'
     ignore:
-      # Blocked by eslint-plugin-react@7.37.5 peer ^9.7
+      # ESLint ecosystem: blocked by eslint-plugin-react@7.37.5 peer ^9.7
+      # Sibling pkgs (@eslint/js, @typescript-eslint/*) must move together.
       - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@eslint/js'
+        update-types:
+          - 'version-update:semver-major'
+      # Pinned to current Node LTS; bump in lockstep with Node bumps
+      - dependency-name: '@types/node'
         update-types:
           - 'version-update:semver-major'
       # Has DB schema implications — own phase

@@ -98,28 +98,28 @@ export default function Home() {
       <div className="mx-auto w-full max-w-5xl flex flex-col gap-20">
         {/* Hero */}
         <section className="flex flex-col items-start gap-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-            <SparklesIcon className="w-3.5 h-3.5 text-blue-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-fg/10 bg-fg/5 px-3 py-1 text-xs text-fg/70">
+            <SparklesIcon className="w-3.5 h-3.5 text-accent" />
             <span>v1 - Next.js 16 starter</span>
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl tracking-tight">
-            <span className="text-blue-500">Howdy.</span>
-            <span className="block text-white mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
+            <span className="text-accent">Howdy.</span>
+            <span className="block text-fg mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
               Christophers-Next-Template
             </span>
           </h1>
-          <p className="text-base sm:text-lg text-white/70 max-w-2xl">
+          <p className="text-base sm:text-lg text-fg/70 max-w-2xl">
             An opinionated Next.js 16 starter with Tailwind 4, NextAuth, Prisma
             + Postgres, and a full test pyramid. Fork it, set three env vars,
             and ship.
           </p>
-          <div className="flex items-center gap-3 text-sm text-white/60">
-            <GitHubIcon className="w-5 h-5 text-white" />
+          <div className="flex items-center gap-3 text-sm text-fg/60">
+            <GitHubIcon className="w-5 h-5 text-fg" />
             <a
               href="https://github.com/christopherrobin/Christophers-Next-Template"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-400"
+              className="hover:text-accent"
             >
               github.com/christopherrobin/Christophers-Next-Template
             </a>
@@ -134,9 +134,7 @@ export default function Home() {
             </Button>
             <Button
               href="/sign-in"
-              endIcon={
-                <ArrowRightCircleIcon className="w-5 h-5 text-blue-500" />
-              }
+              endIcon={<ArrowRightCircleIcon className="w-5 h-5 text-accent" />}
               ghost
               className="sm:min-w-44"
             >
@@ -149,9 +147,9 @@ export default function Home() {
         <section className="flex flex-col gap-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl sm:text-4xl tracking-tight">
-              Built on the <span className="text-blue-500">latest</span>.
+              Built on the <span className="text-accent">latest</span>.
             </h2>
-            <p className="text-white/60 max-w-2xl">
+            <p className="text-fg/60 max-w-2xl">
               Every dependency on its current major. Type-safe end to end,
               security-pinned, audited at every PR.
             </p>
@@ -182,17 +180,17 @@ export default function Home() {
             {stack.map((tech) => (
               <div
                 key={tech.name}
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-4 hover:border-blue-500/40 hover:bg-white/[0.05] transition"
+                className="rounded-xl border border-fg/10 bg-fg/[0.03] p-4 hover:border-accent/40 hover:bg-fg/[0.05] transition"
               >
                 <div className="flex items-baseline justify-between gap-2 mb-1.5">
-                  <span className="text-white font-semibold">{tech.name}</span>
+                  <span className="text-fg font-semibold">{tech.name}</span>
                   {tech.version && (
-                    <span className="font-mono text-xs text-blue-400 px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">
+                    <span className="font-mono text-xs text-accent px-1.5 py-0.5 rounded bg-accent/10 border border-accent/20">
                       {tech.version}
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-white/60 leading-relaxed">
+                <p className="text-sm text-fg/60 leading-relaxed">
                   {tech.blurb}
                 </p>
               </div>
@@ -204,7 +202,7 @@ export default function Home() {
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <h2 className="text-2xl sm:text-3xl">What is in the box</h2>
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-fg/60">
               Everything wired up so you can focus on product, not plumbing.
             </p>
           </div>
@@ -212,33 +210,33 @@ export default function Home() {
             {features.map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="group rounded-xl border border-white/10 bg-white/[0.03] p-5 hover:border-blue-500/40 hover:bg-white/[0.05] transition"
+                className="group rounded-xl border border-fg/10 bg-fg/[0.03] p-5 hover:border-accent/40 hover:bg-fg/[0.05] transition"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="rounded-lg bg-blue-500/10 p-2 text-blue-400 group-hover:bg-blue-500/20 transition">
+                  <div className="rounded-lg bg-accent/10 p-2 text-accent group-hover:bg-accent/20 transition">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-semibold text-white">{title}</h3>
+                  <h3 className="font-semibold text-fg">{title}</h3>
                 </div>
-                <p className="text-sm text-white/60 leading-relaxed">{body}</p>
+                <p className="text-sm text-fg/60 leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-white/10 text-xs text-white/50">
+        <footer className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-fg/10 text-xs text-fg/50">
           <div className="flex items-center gap-2">
             <GitHubIcon className="w-4 h-4" />
             <a
               href="https://github.com/christopherrobin/Christophers-Next-Template"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-400"
+              className="hover:text-accent"
             >
               View on GitHub
             </a>
-            <span className="text-white/30">-</span>
+            <span className="text-fg/30">-</span>
             <span>MIT License</span>
           </div>
           <div>
@@ -247,7 +245,7 @@ export default function Home() {
               href="https://github.com/christopherrobin"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-400"
+              className="hover:text-accent"
             >
               @christopherrobin
             </a>

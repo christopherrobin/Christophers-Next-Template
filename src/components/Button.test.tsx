@@ -50,7 +50,7 @@ describe('Button', () => {
   it('applies ghost styles when ghost prop is true', () => {
     const { getByRole } = render(<Button ghost>Ghost</Button>)
     const button = getByRole('button')
-    expect(button.className).toMatch(/border-blue-500/)
+    expect(button.className).toMatch(/border-accent/)
   })
 
   it('fires onClick when not disabled or loading', async () => {

@@ -53,7 +53,7 @@ export default function SignUp() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 fadeIn">
-      <h1 className="text-2xl md:text-5xl font-bold text-blue-500 mb-8">
+      <h1 className="text-2xl md:text-5xl font-bold text-accent mb-8">
         Sign Up
       </h1>
       <form
@@ -112,9 +112,9 @@ export default function SignUp() {
           </div>
         )}
       </form>
-      <p className="text-white/70 mt-6">
+      <p className="text-fg/70 mt-6">
         Already have an account?{' '}
-        <Link href="/sign-in" className="text-blue-400 underline">
+        <Link href="/sign-in" className="text-accent underline">
           Sign In
         </Link>
       </p>

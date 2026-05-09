@@ -17,15 +17,13 @@ export default async function Dashboard() {
   return (
     <div className="px-4 py-6 fadeIn">
       <main className="flex flex-col gap-4">
-        <h1 className="text-2xl">Dashboard</h1>
-        <h2 className="font-bold text-blue-500 break-words">
-          Welcome, {email}
-        </h2>
+        <h1 className="text-2xl text-fg">Dashboard</h1>
+        <h2 className="font-bold text-accent break-words">Welcome, {email}</h2>
         <div className="flex flex-col gap-4 w-full">
           {/* TODO: remove this debug session dump for production — the JWT
               shape (id, email, expires, etc.) is starter scaffolding. */}
           <pre
-            className="text-sm text-gray-300 whitespace-pre-wrap overflow-x-auto bg-stone-800 p-4 rounded-md w-full"
+            className="text-sm text-fg/60 whitespace-pre-wrap overflow-x-auto bg-surface-elevated p-4 rounded-md w-full"
             data-testid="session-json"
           >
             <code>{JSON.stringify(session, null, 2)}</code>

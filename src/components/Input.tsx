@@ -18,13 +18,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className={
-              hideLabel ? VISUALLY_HIDDEN : 'text-sm text-gray-200 mb-1'
-            }
+            className={hideLabel ? VISUALLY_HIDDEN : 'text-sm text-fg/70 mb-1'}
           >
             {label}
           </label>
         )}
+        {/* Intentionally always-light: white field with dark text in both
+            schemes. Deliberate UX choice — keep consistent across themes. */}
         <input
           ref={ref}
           id={inputId}

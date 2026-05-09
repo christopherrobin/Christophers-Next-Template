@@ -16,7 +16,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const ButtonSpinner = () => {
   return (
     <div className="flex justify-center items-center h-full">
-      <div className="w-6 h-6 border-4 border-t-transparent border-white rounded-full animate-spin" />
+      <div className="w-6 h-6 border-4 border-t-transparent border-current rounded-full animate-spin" />
     </div>
   )
 }
@@ -37,10 +37,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const buttonClasses = ghost
-      ? `rounded border font-extrabold border-blue-500 text-blue-500 hover:border-blue-900 hover:text-white transition cursor-pointer px-6 py-4 bg-transparent ${className} ${
+      ? `rounded border font-extrabold border-accent text-accent hover:border-accent-hover hover:text-fg transition cursor-pointer px-6 py-4 bg-transparent ${className} ${
           disabled || loading ? 'opacity-50 pointer-events-none' : ''
         }`
-      : `rounded bg-blue-500 text-white font-extrabold hover:bg-blue-900 transition cursor-pointer px-6 py-4 ${className} ${
+      : `rounded bg-accent text-on-accent font-extrabold hover:bg-accent-hover transition cursor-pointer px-6 py-4 ${className} ${
           disabled || loading ? 'opacity-50 pointer-events-none' : ''
         }`
 

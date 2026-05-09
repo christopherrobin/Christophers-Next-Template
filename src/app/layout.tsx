@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
 import { Providers } from '@/components/Providers'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import './globals.css'
 
 const geistSans = Geist({
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }]
   },
   other: {
-    'msapplication-TileColor': '#2f855a',
+    'msapplication-TileColor': '#1c1917',
     'msapplication-TileImage': '/apple-touch-icon.png'
   }
 }
@@ -43,7 +44,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#2f855a'
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1917' }
+  ]
 }
 
 export default function RootLayout({
@@ -52,11 +56,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <ThemeToggle />
+          {children}
+        </Providers>
       </body>
     </html>
   )

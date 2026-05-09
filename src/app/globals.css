@@ -1,18 +1,37 @@
 /*
  * Tailwind 4 globals for Christophers-Next-Template.
  *
- * The starter is intentionally dark-mode-only. There is no light-mode
- * theme, no <html class="dark"> toggle, and no `prefers-color-scheme`
- * fallback. Forks that want light mode should swap the @theme tokens
- * here and remove the body color overrides below.
+ * Theming model: semantic CSS variables defined as Tailwind 4 @theme tokens.
+ * Light is the base; dark overrides via `.dark` class on <html> (set by
+ * next-themes). Token names map to utility classes — e.g. `--color-fg`
+ * generates `text-fg`, `bg-fg`, `border-fg`, and opacity modifiers like
+ * `text-fg/70` work via color-mix.
+ *
+ * Default mode: system preference (handled by next-themes ThemeProvider).
+ * User can override via the ThemeToggle in <RootLayout/>.
  */
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-background: var(--color-stone-900);
-  --color-foreground: #fff;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f8fafc;
+  --color-fg: #0a0a0a;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1e3a8a;
+  --color-on-accent: #ffffff;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+.dark {
+  --color-surface: #1c1917;
+  --color-surface-elevated: #292524;
+  --color-fg: #ffffff;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-on-accent: #ffffff;
 }
 
 html {
@@ -20,8 +39,8 @@ html {
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--color-surface);
+  color: var(--color-fg);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.5;
@@ -32,9 +51,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Heading + link element-level defaults. We intentionally do NOT set
- * `p { color }` or `a { transition: all }` — Tailwind utilities should
- * win on these surfaces and `transition: all` is a known perf footgun. */
+/* Heading element-level defaults — typography only. Color is owned by
+ * Tailwind utilities (text-fg, text-accent) so palette decisions live
+ * in one place. We intentionally do NOT set `p { color }` or
+ * `a { transition: all }` — Tailwind utilities should win on these
+ * surfaces and `transition: all` is a known perf footgun. */
 
 h1,
 h2,
@@ -44,7 +65,6 @@ h5,
 h6 {
   font-family: var(--font-sans);
   font-weight: 600;
-  color: var(--color-blue-500);
 }
 h1 {
   font-size: 2.3rem;
@@ -53,7 +73,6 @@ h1 {
 h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--color-white);
 }
 
 @keyframes fadeIn {

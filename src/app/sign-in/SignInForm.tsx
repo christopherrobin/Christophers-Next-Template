@@ -94,9 +94,9 @@ function SignInForm() {
         </div>
       )}
       <div className="mt-4 text-center">
-        <p className="text-white/70 mt-3">
+        <p className="text-fg/70 mt-3">
           Don&apos;t have an account?{' '}
-          <a href="/sign-up" className="text-blue-400 underline">
+          <a href="/sign-up" className="text-accent underline">
             Sign up
           </a>
         </p>

@@ -119,7 +119,7 @@ export default function Home() {
               href="https://github.com/christopherrobin/Christophers-Next-Template"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent"
+              className="underline underline-offset-2 hover:text-accent"
             >
               github.com/christopherrobin/Christophers-Next-Template
             </a>
@@ -225,18 +225,18 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-fg/10 text-xs text-fg/50">
+        <footer className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-fg/10 text-xs text-fg/70">
           <div className="flex items-center gap-2">
             <GitHubIcon className="w-4 h-4" />
             <a
               href="https://github.com/christopherrobin/Christophers-Next-Template"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent"
+              className="underline underline-offset-2 hover:text-accent"
             >
               View on GitHub
             </a>
-            <span className="text-fg/30">-</span>
+            <span className="text-fg/40">-</span>
             <span>MIT License</span>
           </div>
           <div>
@@ -245,7 +245,7 @@ export default function Home() {
               href="https://github.com/christopherrobin"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent"
+              className="underline underline-offset-2 hover:text-accent"
             >
               @christopherrobin
             </a>

@@ -5,7 +5,8 @@ import {
   SunIcon
 } from '@heroicons/react/24/outline'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+
+import { useHydrated } from '@/hooks/useHydrated'
 
 type ThemeValue = 'system' | 'light' | 'dark'
 
@@ -23,10 +24,8 @@ const CONTAINER_CLASSES =
   'fixed top-4 right-4 z-50 flex items-center gap-0.5 rounded-full border border-fg/10 bg-surface-elevated p-0.5'
 
 export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false)
+  const mounted = useHydrated()
   const { theme, setTheme } = useTheme()
-
-  useEffect(() => setMounted(true), [])
 
   // Render real markup pre-mount with no active state — preserves layout
   // (no hydration jump) and stays inert until next-themes resolves.

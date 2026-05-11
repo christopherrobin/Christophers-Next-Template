@@ -29,9 +29,12 @@
   --color-surface: #1c1917;
   --color-surface-elevated: #292524;
   --color-fg: #ffffff;
-  --color-accent: #3b82f6;
-  --color-accent-hover: #60a5fa;
-  --color-on-accent: #ffffff;
+  /* Blue-300 (lighter) so accent-on-dark-surface link text passes
+   * WCAG AA 4.5:1. Pair with dark on-accent text — white on this
+   * shade would only be ~2.3:1 on solid bg-accent buttons. */
+  --color-accent: #93c5fd;
+  --color-accent-hover: #bfdbfe;
+  --color-on-accent: #0a0a0a;
 }
 
 html {

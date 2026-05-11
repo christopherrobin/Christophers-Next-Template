@@ -1,15 +1,23 @@
 'use client'
 import { signIn } from 'next-auth/react'
 
-// Shared client-side helper used by both the sign-in form and the post-
-// sign-up auto-login flow. Wraps `next-auth/react`'s `signIn` with our
-// `redirect: false` + manual `router.push(callbackUrl)` pattern so the two
-// call sites stay in lockstep.
-
 export type CredentialsSignInResult =
   | { ok: true }
   | { ok: false; error: string }
 
+/**
+ * Client-side credentials sign-in shared between the sign-in form and
+ * the post-sign-up auto-login flow.
+ *
+ * @remarks
+ * Wraps `next-auth/react`'s {@link signIn} with the
+ * `redirect: false` + manual `router.push(callbackUrl)` pattern so the
+ * two call sites stay in lockstep on error handling and navigation.
+ *
+ * @param email - User-entered email (raw string; not validated here).
+ * @param password - Plaintext password forwarded to the credentials provider.
+ * @param callbackUrl - Destination after a successful sign-in. Defaults to `/dashboard`.
+ */
 export async function postCredentialsSignIn(
   email: string,
   password: string,

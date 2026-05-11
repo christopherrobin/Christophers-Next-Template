@@ -23,6 +23,14 @@ const OPTIONS: ReadonlyArray<{
 const CONTAINER_CLASSES =
   'fixed top-4 right-4 z-50 flex items-center gap-0.5 rounded-full border border-fg/10 bg-surface-elevated p-0.5'
 
+/**
+ * Fixed-position System / Light / Dark toggle.
+ *
+ * Reads and writes the active theme through `next-themes`. Buttons are
+ * disabled until {@link useHydrated} flips true so the pressed state
+ * doesn't briefly disagree with the inline pre-hydration script's
+ * choice on first paint.
+ */
 export function ThemeToggle() {
   const mounted = useHydrated()
   const { theme, setTheme } = useTheme()

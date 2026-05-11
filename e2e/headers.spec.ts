@@ -27,8 +27,7 @@ test.describe('security headers', () => {
     const res = await request.get('/')
     const csp = res.headers()['content-security-policy']
     expect(csp).toBeTruthy()
-    // Report-Only header should NOT be present once Phase 14.2 enforcement
-    // shipped.
+    // CSP is enforcing; the Report-Only mirror header must not be present.
     expect(res.headers()['content-security-policy-report-only']).toBeUndefined()
 
     expect(csp).toContain("default-src 'self'")

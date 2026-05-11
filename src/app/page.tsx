@@ -96,7 +96,6 @@ export default function Home() {
   return (
     <div className="min-h-screen px-6 py-12 sm:py-16 fadeIn">
       <div className="mx-auto w-full max-w-5xl flex flex-col gap-20">
-        {/* Hero */}
         <section className="flex flex-col items-start gap-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-fg/10 bg-fg/5 px-3 py-1 text-xs text-fg/70">
             <SparklesIcon className="w-3.5 h-3.5 text-accent" />
@@ -143,7 +142,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* The Stack — the actual flex */}
         <section className="flex flex-col gap-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl sm:text-4xl tracking-tight">
@@ -155,7 +153,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Big branded badge wall */}
           <div className="flex flex-wrap gap-3 items-center">
             {stack.map((tech) => (
               <a
@@ -175,7 +172,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Per-tech breakdown grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
             {stack.map((tech) => (
               <div
@@ -198,7 +194,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features */}
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <h2 className="text-2xl sm:text-3xl">What is in the box</h2>
@@ -224,7 +219,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-fg/10 text-xs text-fg/70">
           <div className="flex items-center gap-2">
             <GitHubIcon className="w-4 h-4" />

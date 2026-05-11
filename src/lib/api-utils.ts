@@ -1,5 +1,6 @@
-// NextAuth v4 — update getServerSession + AuthOptions imports on v5 migration
 import { NextResponse } from 'next/server'
+// TODO: on NextAuth v5 migration, swap `getServerSession` for `auth()`
+// and import `AuthOptions` from the new entry point.
 import { getServerSession, type Session } from 'next-auth'
 
 import { authOptions } from '@/lib/auth'

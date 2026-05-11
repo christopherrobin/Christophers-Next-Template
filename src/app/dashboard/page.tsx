@@ -20,8 +20,8 @@ export default async function Dashboard() {
         <h1 className="text-2xl text-fg">Dashboard</h1>
         <h2 className="font-bold text-accent break-words">Welcome, {email}</h2>
         <div className="flex flex-col gap-4 w-full">
-          {/* TODO: remove this debug session dump for production — the JWT
-              shape (id, email, expires, etc.) is starter scaffolding. */}
+          {/* Debug-only session dump shipped with the starter so a forker
+              can see the JWT shape. Remove before deploying to production. */}
           <pre
             className="text-sm text-fg/60 whitespace-pre-wrap overflow-x-auto bg-surface-elevated p-4 rounded-md w-full"
             data-testid="session-json"

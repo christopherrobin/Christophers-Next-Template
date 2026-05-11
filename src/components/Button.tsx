@@ -1,4 +1,3 @@
-// src/components/Button.tsx
 import Link from 'next/link'
 import React from 'react'
 
@@ -44,7 +43,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           disabled || loading ? 'opacity-50 pointer-events-none' : ''
         }`
 
-    // If href is provided, render a Link component
     if (href) {
       return (
         <Link
@@ -62,7 +60,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       )
     }
 
-    // Otherwise, render a button
     return (
       <button
         className={buttonClasses}

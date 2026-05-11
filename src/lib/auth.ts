@@ -1,4 +1,3 @@
-// src/lib/auth.ts
 import { compare } from 'bcryptjs'
 import type { AuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -25,11 +24,11 @@ export const authOptions: AuthOptions = {
           where: { email: credentials.email }
         })
         if (!user) throw new Error('Invalid email or password')
-        // Compare hashed password
         const valid = await compare(credentials.password, user.password)
         if (!valid) throw new Error('Invalid email or password')
 
-        // Return user with necessary fields, converting Date objects to ISO strings
+        // Dates → ISO strings so the returned User is JSON-safe for the
+        // JWT/session callbacks downstream.
         return {
           id: user.id,
           email: user.email,

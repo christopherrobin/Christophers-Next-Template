@@ -2,8 +2,15 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
-// Protects /dashboard (requires auth) and redirects authenticated users
-// away from /sign-in and /sign-up to /dashboard.
+/**
+ * Route gate paired with {@link config.matcher} below.
+ *
+ * - Anonymous visits to `/dashboard/*` redirect to `/sign-in` with a
+ *   `callbackUrl` set to the original path+query.
+ * - Authenticated visits to `/sign-in` or `/sign-up` redirect straight
+ *   to `/dashboard`.
+ * - Everything else on the matcher passes through unchanged.
+ */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const token = await getToken({

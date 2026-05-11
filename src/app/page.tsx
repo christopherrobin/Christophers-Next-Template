@@ -190,7 +190,7 @@ export default function Home() {
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-fg/60 leading-relaxed">
+                <p className="text-sm text-fg/70 leading-relaxed">
                   {tech.blurb}
                 </p>
               </div>
@@ -218,7 +218,7 @@ export default function Home() {
                   </div>
                   <h3 className="font-semibold text-fg">{title}</h3>
                 </div>
-                <p className="text-sm text-fg/60 leading-relaxed">{body}</p>
+                <p className="text-sm text-fg/70 leading-relaxed">{body}</p>
               </div>
             ))}
           </div>

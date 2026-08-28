@@ -7,9 +7,17 @@ updates:
       day: 'monday'
     open-pull-requests-limit: 5
     groups:
+      # Security fixes arrive as one PR per run instead of one per
+      # advisory — a single Next.js release can carry a dozen CVEs.
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - '*'
       dev-dependencies:
+        applies-to: version-updates
         dependency-type: 'development'
       production-dependencies:
+        applies-to: version-updates
         dependency-type: 'production'
         update-types:
           - 'minor'

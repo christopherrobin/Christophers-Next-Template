@@ -141,6 +141,8 @@ jobs:
           # by package rather than by license so a genuinely copyleft runtime
           # dependency still fails the gate. Without this the check fails on
           # every sharp release, since next pulls the libvips binaries.
+          # caniuse-lite is CC-BY-4.0: browser-support data read at build
+          # time by browserslist, not code linked into the app.
           allow-dependencies-licenses: >-
             pkg:npm/@img/sharp-libvips-darwin-arm64,
             pkg:npm/@img/sharp-libvips-darwin-x64,
@@ -158,5 +160,6 @@ jobs:
             pkg:npm/@img/sharp-win32-arm64,
             pkg:npm/@img/sharp-win32-ia32,
             pkg:npm/@img/sharp-win32-x64,
+            pkg:npm/caniuse-lite,
             pkg:npm/elkjs,
             pkg:npm/robust-predicates

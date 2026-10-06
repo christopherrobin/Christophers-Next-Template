@@ -2,8 +2,7 @@
 import { signIn } from 'next-auth/react'
 
 export type CredentialsSignInResult =
-  | { ok: true }
-  | { ok: false; error: string }
+  { ok: true } | { ok: false; error: string }
 
 /**
  * Client-side credentials sign-in shared between the sign-in form and

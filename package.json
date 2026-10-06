@@ -93,6 +93,10 @@
     "type": "git",
     "url": "https://github.com/christopherrobin/Christophers-Next-Template.git"
   },
+  "homepage": "https://christophers-next-template.vercel.app/",
+  "bugs": {
+    "url": "https://github.com/christopherrobin/Christophers-Next-Template/issues"
+  },
   "engines": {
     "node": ">=24.0.0"
   },

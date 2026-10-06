@@ -15,6 +15,8 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![NextAuth.js](https://img.shields.io/badge/NextAuth.js-4-000000?style=for-the-badge&logo=auth0&logoColor=white)](https://next-auth.js.org/)
 
+**Live demo:** [christophers-next-template.vercel.app](https://christophers-next-template.vercel.app/)
+
 ![Welcome Preview](public/welcome.png)
 
 ## A modern, minimal authentication starter for developers, built with Next.js, TypeScript, Prisma, and Tailwind CSS.
@@ -39,6 +41,9 @@
 - **End-to-End (E2E) Testing** with Playwright
 - User registration and login flows
 - Protected dashboard for authenticated users
+- System / Light / Dark theme toggle, persisted per browser
+- Content-Security-Policy and hardened security headers (`next.config.ts`)
+- Automated accessibility checks with axe-core in the Playwright suite (`e2e/a11y.spec.ts`)
 
 ## Getting Started
 

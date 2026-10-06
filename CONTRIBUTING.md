@@ -19,7 +19,7 @@ Run the same checks CI runs:
 yarn type-check && yarn lint && yarn test && yarn build
 ```
 
-If you change UI or routing, also run `yarn test:e2e` (needs `.env.test`; see `e2e/README.md`).
+If you change UI or routing, also run `yarn test:e2e` (copy `.env.test.example` to `.env.test` first).
 
 ## Conventions
 

@@ -81,7 +81,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app.
 ## Project Structure
 
 - `src/app/` — Next.js App Router pages (home, sign-up, sign-in, dashboard, `not-found.tsx`)
-- `src/components/` — Reusable UI components (Button, Input, Spinner, GitHubIcon, Providers)
+- `src/components/` — Reusable UI components (Button, Input, Spinner, GitHubIcon, ThemeToggle, Providers)
 - `src/lib/` — Prisma client, NextAuth config, env validation (`env.ts`), API helpers (`api-utils.ts`), shared Zod schemas (`schemas.ts`)
 - `src/proxy.ts` — Next 16 middleware (route protection and auth redirects)
 - `prisma/` — Prisma schema and migrations

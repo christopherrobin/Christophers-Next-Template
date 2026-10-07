@@ -2,6 +2,8 @@
 
 Christophers-Next-Template is a personal Next.js starter template. Bug reports and small fixes are welcome. For anything larger, please open an issue first so we can agree on the approach before you spend time on it.
 
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Setup
 
 ```bash
